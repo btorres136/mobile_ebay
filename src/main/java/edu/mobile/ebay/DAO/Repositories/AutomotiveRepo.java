@@ -6,5 +6,4 @@ import edu.mobile.ebay.DAO.Entities.Automotive;
 
 public interface AutomotiveRepo extends JpaRepository<Automotive, Long> {
     
-
 }

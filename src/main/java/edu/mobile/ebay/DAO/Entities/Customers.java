@@ -30,4 +30,62 @@ public class Customers {
     @Column(name = "AccountCreated", nullable = false)
     private Date AccountCreated;
 
+    public Customers() {
+    }
+
+    public Customers(Long customerID, ProductOwners productOwnersID, String name, int rating, Date accountCreated) {
+        CustomerID = customerID;
+        ProductOwnersID = productOwnersID;
+        Name = name;
+        Rating = rating;
+        AccountCreated = accountCreated;
+    }
+
+    public Long getCustomerID() {
+        return CustomerID;
+    }
+
+    public void setCustomerID(Long customerID) {
+        CustomerID = customerID;
+    }
+
+    public ProductOwners getProductOwnersID() {
+        return ProductOwnersID;
+    }
+
+    public void setProductOwnersID(ProductOwners productOwnersID) {
+        ProductOwnersID = productOwnersID;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public int getRating() {
+        return Rating;
+    }
+
+    public void setRating(int rating) {
+        Rating = rating;
+    }
+
+    public Date getAccountCreated() {
+        return AccountCreated;
+    }
+
+    public void setAccountCreated(Date accountCreated) {
+        AccountCreated = accountCreated;
+    }
+
+    @Override
+    public String toString() {
+        return "Customers [AccountCreated=" + AccountCreated + ", CustomerID=" + CustomerID + ", Name=" + Name
+                + ", ProductOwnersID=" + ProductOwnersID + ", Rating=" + Rating + "]";
+    }
+
+    
 }

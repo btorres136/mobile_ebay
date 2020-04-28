@@ -1,5 +1,6 @@
 package edu.mobile.ebay.DAO.Entities;
 
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -27,10 +28,10 @@ public class Products {
     private String Description;
 
     @Column( name = "StartBid", nullable = false, length = 10)
-    private int StartBid;
+    private Date StartBid;
 
     @Column(name = "EndBid", nullable = false, length = 10)
-    private int EndBid;
+    private Date EndBid;
 
     @Column(name = "State", nullable = false, length = 30)
     private String State;
@@ -60,4 +61,131 @@ public class Products {
 
     @OneToOne(mappedBy = "ProductsID")
     private Bids productsBids;
+
+    public Products() {
+    }
+
+    public Products(Long productsID, String description, Date startBid, Date endBid, String state, String imagePath,
+            int quantity, ProductOwners productOwnersID, Set<Sports> sportsProducts,
+            Set<Electronics> electronicsProducts, Set<Automotive> automotiveProducts, Bids productsBids) {
+        ProductsID = productsID;
+        Description = description;
+        StartBid = startBid;
+        EndBid = endBid;
+        State = state; 
+        ImagePath = imagePath;
+        Quantity = quantity;
+        ProductOwnersID = productOwnersID;
+        this.sportsProducts = sportsProducts;
+        this.electronicsProducts = electronicsProducts;
+        this.automotiveProducts = automotiveProducts;
+        this.productsBids = productsBids;
+    }
+
+    public Long getProductsID() {
+        return ProductsID;
+    }
+
+    public void setProductsID(Long productsID) {
+        ProductsID = productsID;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public Date getStartBid() {
+        return StartBid;
+    }
+
+    public void setStartBid(Date startBid) {
+        StartBid = startBid;
+    }
+
+    public Date getEndBid() {
+        return EndBid;
+    }
+
+    public void setEndBid(Date endBid) {
+        EndBid = endBid;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+    public ProductOwners getProductOwnersID() {
+        return ProductOwnersID;
+    }
+
+    public void setProductOwnersID(ProductOwners productOwnersID) {
+        ProductOwnersID = productOwnersID;
+    }
+
+    public Set<Sports> getSportsProducts() {
+        return sportsProducts;
+    }
+
+    public void setSportsProducts(Set<Sports> sportsProducts) {
+        this.sportsProducts = sportsProducts;
+    }
+
+    public Set<Electronics> getElectronicsProducts() {
+        return electronicsProducts;
+    }
+
+    public void setElectronicsProducts(Set<Electronics> electronicsProducts) {
+        this.electronicsProducts = electronicsProducts;
+    }
+
+    public Set<Automotive> getAutomotiveProducts() {
+        return automotiveProducts;
+    }
+
+    public void setAutomotiveProducts(Set<Automotive> automotiveProducts) {
+        this.automotiveProducts = automotiveProducts;
+    }
+
+    public Bids getProductsBids() {
+        return productsBids;
+    }
+
+    public void setProductsBids(Bids productsBids) {
+        this.productsBids = productsBids;
+    }
+
+    @Override
+    public String toString() {
+        return "Products [Description=" + Description + ", EndBid=" + EndBid + ", ImagePath=" + ImagePath
+                + ", ProductOwnersID=" + ProductOwnersID + ", ProductsID=" + ProductsID + ", Quantity=" + Quantity
+                + ", StartBid=" + StartBid + ", State=" + State + ", automotiveProducts=" + automotiveProducts
+                + ", electronicsProducts=" + electronicsProducts + ", productsBids=" + productsBids
+                + ", sportsProducts=" + sportsProducts + "]";
+    }
+
+    
 }

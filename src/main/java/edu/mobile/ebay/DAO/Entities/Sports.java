@@ -21,4 +21,35 @@ public class Sports {
     @ManyToMany(mappedBy = "sportsProducts")
     private Set<Products> ProductsID;
 
+    public Sports() {
+    }
+
+    public Sports(Long sportsID, Set<Products> productsID) {
+        SportsID = sportsID;
+        ProductsID = productsID;
+    }
+
+    public Long getSportsID() {
+        return SportsID;
+    }
+
+    public void setSportsID(Long sportsID) {
+        SportsID = sportsID;
+    }
+
+    public Set<Products> getProductsID() {
+        return ProductsID;
+    }
+
+    public void setProductsID(Set<Products> productsID) {
+        ProductsID = productsID;
+    }
+
+    @Override
+    public String toString() {
+        return "Sports [ProductsID=" + ProductsID + ", SportsID=" + SportsID + "]";
+    }
+
+    
+
 }

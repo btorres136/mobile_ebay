@@ -32,4 +32,63 @@ public class Bids {
     @OneToOne
     @JoinColumn(name = "ProductsID", nullable = false)
     private Products ProductsID;
+
+    public Bids() {
+    }
+
+    public Bids(Long bidID, int bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
+        BidID = bidID;
+        BidQuantity = bidQuantity;
+        BidTimeSet = bidTimeSet;
+        CustomerID = customerID;
+        ProductsID = productsID;
+    }
+
+    public Long getBidID() {
+        return BidID;
+    }
+
+    public void setBidID(Long bidID) {
+        BidID = bidID;
+    }
+
+    public int getBidQuantity() {
+        return BidQuantity;
+    }
+
+    public void setBidQuantity(int bidQuantity) {
+        BidQuantity = bidQuantity;
+    }
+
+    public Date getBidTimeSet() {
+        return BidTimeSet;
+    }
+
+    public void setBidTimeSet(Date bidTimeSet) {
+        BidTimeSet = bidTimeSet;
+    }
+
+    public Customers getCustomerID() {
+        return CustomerID;
+    }
+
+    public void setCustomerID(Customers customerID) {
+        CustomerID = customerID;
+    }
+
+    public Products getProductsID() {
+        return ProductsID;
+    }
+
+    public void setProductsID(Products productsID) {
+        ProductsID = productsID;
+    }
+
+    @Override
+    public String toString() {
+        return "Bids [BidID=" + BidID + ", BidQuantity=" + BidQuantity + ", BidTimeSet=" + BidTimeSet + ", CustomerID="
+                + CustomerID + ", ProductsID=" + ProductsID + "]";
+    }
+
+    
 }
