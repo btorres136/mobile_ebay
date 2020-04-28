@@ -13,12 +13,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
         .ldapAuthentication()
-        .userDnPatterns("uid={0}, ou=people")
-        .userSearchBase("ou=people")
+        .userDnPatterns("uid={0}, ou=Users")
+        .groupRoleAttribute("ou")
+        .userSearchBase("ou=Users")
         .userSearchFilter("uid={0}")
+        .groupSearchBase("ou=Groups")
         .groupSearchFilter("uniqueMember={0}")
-        .groupSearchBase("ou=groups")
-        .contextSource().url("ldap://localhost:8389/dc=mobile_ebay,dc=com")
+        .contextSource().url("ldap://192.168.8.138:389/dc=mobile_ebay,dc=com")
+        .managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
+        .managerPassword("87512738")
         .and()
         .passwordCompare()
         .passwordEncoder(new BCryptPasswordEncoder())
@@ -28,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login", "/products", "/", "/index", "/CSS/*", "/JS/*", "/IMG/*")
-        .permitAll().antMatchers("/sec/**").hasRole("ADMINS").anyRequest().denyAll().and().formLogin()
+        .permitAll().antMatchers("/sec/**").hasRole("CUSTOMERS").anyRequest().denyAll().and().formLogin()
         .loginPage("/login")
         .loginProcessingUrl("/process_login")
         .successHandler(new CustomAuthenticationSuccessHandler());
