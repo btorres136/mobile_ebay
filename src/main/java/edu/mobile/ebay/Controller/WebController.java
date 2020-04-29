@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.mobile.ebay.DAO.Entities.Bids;
 import edu.mobile.ebay.DAO.Entities.Products;
+import edu.mobile.ebay.DAO.Entities.Sales;
 import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
 import edu.mobile.ebay.DAO.Repositories.BidsRepo;
 import edu.mobile.ebay.DAO.Repositories.CustomersRepo;
@@ -98,6 +99,12 @@ public class WebController {
         
         List<Bids> bids = bidRepo.findBids(112);
         model.addAttribute("bids", bids);
+
+        List<Sales> sales = salesRepo.findSalesByCustomerID(112);
+        model.addAttribute("sales", sales);
+
+        List<Products> products = productsRepo.findAll();
+        model.addAttribute("products", products);
         return "products";
     }
 
