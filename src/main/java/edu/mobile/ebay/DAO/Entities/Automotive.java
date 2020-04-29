@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
-
 
 @Entity
 @Table(name = "Automotive")

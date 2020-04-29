@@ -7261,3 +7261,30 @@ body {
 .content {
   width: 100%;
   overflow: hidden; }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  transition: all 0.3s; }
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .categories a {
+    font-size: 1.5rem;
+    color: #fff; }
+
+.form-search {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: .6rem; }
+  .form-search_search-box {
+    flex: 15;
+    font-size: 1.6rem; }
+  .form-search_button {
+    margin-left: 3rem;
+    flex: 1;
+    font-size: 1.6rem; }

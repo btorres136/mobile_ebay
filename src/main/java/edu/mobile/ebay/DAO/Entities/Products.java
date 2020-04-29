@@ -42,6 +42,9 @@ public class Products {
     @Column(name = "Quantity", nullable = false, length = 10)
     private int Quantity;
 
+    @Column(name = "Title", nullable=false, length = 30)
+    private String Title;
+
     @ManyToOne
     @JoinColumn(name = "ProductOwnerID", nullable = false)
     private ProductOwners ProductOwnersID;
@@ -66,15 +69,16 @@ public class Products {
     }
 
     public Products(Long productsID, String description, Date startBid, Date endBid, String state, String imagePath,
-            int quantity, ProductOwners productOwnersID, Set<Sports> sportsProducts,
+            int quantity, String title, ProductOwners productOwnersID, Set<Sports> sportsProducts,
             Set<Electronics> electronicsProducts, Set<Automotive> automotiveProducts, Bids productsBids) {
         ProductsID = productsID;
         Description = description;
         StartBid = startBid;
         EndBid = endBid;
-        State = state; 
+        State = state;
         ImagePath = imagePath;
         Quantity = quantity;
+        Title = title;
         ProductOwnersID = productOwnersID;
         this.sportsProducts = sportsProducts;
         this.electronicsProducts = electronicsProducts;
@@ -138,6 +142,14 @@ public class Products {
         Quantity = quantity;
     }
 
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
     public ProductOwners getProductOwnersID() {
         return ProductOwnersID;
     }
@@ -182,10 +194,8 @@ public class Products {
     public String toString() {
         return "Products [Description=" + Description + ", EndBid=" + EndBid + ", ImagePath=" + ImagePath
                 + ", ProductOwnersID=" + ProductOwnersID + ", ProductsID=" + ProductsID + ", Quantity=" + Quantity
-                + ", StartBid=" + StartBid + ", State=" + State + ", automotiveProducts=" + automotiveProducts
-                + ", electronicsProducts=" + electronicsProducts + ", productsBids=" + productsBids
+                + ", StartBid=" + StartBid + ", State=" + State + ", Title=" + Title + ", automotiveProducts="
+                + automotiveProducts + ", electronicsProducts=" + electronicsProducts + ", productsBids=" + productsBids
                 + ", sportsProducts=" + sportsProducts + "]";
     }
-
-    
 }

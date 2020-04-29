@@ -1,0 +1,15 @@
+.form-search{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: .6rem;
+    &_search-box{
+        flex:15;  
+        font-size: $default-font-size;
+    }
+    &_button{
+        margin-left: 3rem;
+        flex: 1;
+        font-size: $default-font-size;
+    }
+}

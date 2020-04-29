@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="edu.mobile.ebay.DAO.Entities.Products" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,6 +14,8 @@
       <%@ include file="Partials/sidebar.jsp" %>
       <main class="content color-tertiary">
         <%@ include file="Partials/navbar.jsp" %>
+        <%@ include file="Partials/main-search.jsp" %>
+        <%@ include file="Partials/products.jsp" %>
       </main>
     </div>
   </body>

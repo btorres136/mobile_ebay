@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import edu.mobile.ebay.DAO.Entities.Automotive;
 import edu.mobile.ebay.DAO.Entities.Bids;
-import edu.mobile.ebay.DAO.Entities.Customers;
-import edu.mobile.ebay.DAO.Entities.Electronics;
+import edu.mobile.ebay.DAO.Entities.Products;
 import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
 import edu.mobile.ebay.DAO.Repositories.BidsRepo;
 import edu.mobile.ebay.DAO.Repositories.CustomersRepo;
@@ -68,9 +68,25 @@ public class WebController {
     @GetMapping("/sec/Menu")
     public String Menu(Model model, Principal user) {
         model.addAttribute("user", user.getName());
+        List<Products> products = productsRepo.findAll();
+        model.addAttribute("products", products);
         return "Menu";
     }
 
+    @GetMapping("/sec/Products/Add")
+    public String AddProduct(){
+        return "AddProduct";
+    }
+
+    @PostMapping("/sec/Products/Add")
+    public String AddtoProducts(
+        @RequestParam("ProductTitle") String Title, 
+        @RequestParam("Description") String Description,
+        @RequestParam("img") MultipartFile Img
+    ){
+    
+        return "AddProduct";
+    }
  
     @GetMapping("/products")
     public String products(Model model){
