@@ -27,6 +27,11 @@ import edu.mobile.ebay.DAO.Repositories.SportsRepo;
 
 @Controller
 public class WebController {
+    @Autowired
+    CustomersRepo customer;
+
+    @Autowired
+    BidsRepo bid;
 
     @Autowired
     AutomotiveRepo autoRepo;
@@ -58,12 +63,13 @@ public class WebController {
     }
 
     @GetMapping("/login")
-    public String Login(){
+    public String Login() {
         return "Login";
     }
 
     @GetMapping("/sec/Menu")
-    public String Menu(Model model, Principal user){
+    public String Menu(Model model, Principal user) {
+        model.addAttribute("user", user.getName());
         return "Menu";
     }
 
@@ -86,4 +92,21 @@ public class WebController {
         model.addAttribute("products", products);
         return "products";
     }
+
+    /*@GetMapping("/error")
+    public String handleError(Model model, HttpServletRequest request) {
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        if (status != null) {
+            Integer statusCode = Integer.valueOf(status.toString());
+            switch (statusCode) {
+                case 404:
+                    model.addAttribute("error", 404);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return "error";
+    }*/
 }
