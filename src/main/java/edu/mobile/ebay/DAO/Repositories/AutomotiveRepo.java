@@ -7,8 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import edu.mobile.ebay.DAO.Entities.Automotive; 
 
 public interface AutomotiveRepo extends JpaRepository<Automotive, Long> {
-
     /*@Query("")
     Automotive findbyID(@DateTimeFormat(style = "yyyy-mm-dd") Date )*/
-    
 }

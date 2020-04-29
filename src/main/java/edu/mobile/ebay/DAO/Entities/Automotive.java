@@ -9,15 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
+
 
 @Entity
 @Table(name = "Automotive")
 public class Automotive {
 
+
     @Id
     @GeneratedValue
     @Column(name = "AutomotiveID", length = 11, nullable= false)
     private Long AutomotiveID;
+
+    @Column(name = "AutoDescription", length = 250, nullable = false)
+    private String AutoDescription;
 
     @ManyToMany(mappedBy = "automotiveProducts")
     private Set<Products> ProductsID;
@@ -26,8 +34,9 @@ public class Automotive {
     
     }
 
-    public Automotive(Long automotiveID, Set<Products> productsID) {
+    public Automotive(Long automotiveID, String autoDescription, Set<Products> productsID) {
         AutomotiveID = automotiveID;
+        AutoDescription = autoDescription;
         ProductsID = productsID;
     }
 
@@ -37,6 +46,14 @@ public class Automotive {
 
     public void setAutomotiveID(Long automotiveID) {
         AutomotiveID = automotiveID;
+    }
+
+    public String getAutoDescription() {
+        return AutoDescription;
+    }
+
+    public void setAutoDescription(String autoDescription) {
+        AutoDescription = autoDescription;
     }
 
     public Set<Products> getProductsID() {
@@ -49,8 +66,10 @@ public class Automotive {
 
     @Override
     public String toString() {
-        return "Automotive [AutomotiveID=" + AutomotiveID + ", ProductsID=" + ProductsID + "]";
+        return "Automotive [AutoDescription=" + AutoDescription + ", AutomotiveID=" + AutomotiveID + ", ProductsID="
+                + ProductsID + "]";
     }
+
     
     
     
