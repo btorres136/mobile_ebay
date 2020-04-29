@@ -7137,3 +7137,127 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+
+@keyframes Spinner {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05); }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+.pulse {
+  font-size: 3rem;
+  animation: pulse 1s infinite; }
+
+/*$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;*/
+/*$color-primary: #0b3954;
+$color-secondary: #093147;
+$color-tertiary: #edae49;
+$color-fourth: #d1495b;
+$color-five: #00798c;*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+
+body {
+  font-weight: 300;
+  line-height: 1.6; }
+
+.color-primary {
+  background-color: #2e314d; }
+
+.color-primary-light {
+  background-color: #3a3b5d; }
+
+.color-primary-dark {
+  background-color: #1b1d2e; }
+
+.color-tertiary {
+  background-color: #1c1d2f; }
+
+.default-size {
+  font-size: 1.6rem; }
+
+.text-color-blue {
+  color: #4fa7da; }
+
+.UserIcon {
+  color: #fff;
+  font-size: 2.5rem; }
+
+.BarsIcon {
+  color: #fff;
+  font-size: 2rem; }
+
+/*.navbar-user{
+    color: $color-white;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+    align-items: center;
+    align-content: center;
+    &--username{
+        text-align: center;
+        line-height: 2rem;
+        margin-right: 2rem;
+        margin-bottom: 0;
+        font-size: $default-font-size;
+    }
+}*/
+.wrapper {
+  display: flex;
+  align-items: stretch; }
+
+#sidebar {
+  min-width: 25rem;
+  max-width: 25rem;
+  min-height: 100vh;
+  background-color: #2e314d;
+  padding: 2rem;
+  transition: all 0.3s;
+  color: #fff; }
+
+#sidebar.active {
+  margin-left: -25rem; }
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%); }
+
+@media (max-width: 932px) {
+  #sidebar {
+    margin-left: -250px; }
+  #sidebar.active {
+    margin-left: 0; } }
+
+.content {
+  width: 100%;
+  overflow: hidden; }
