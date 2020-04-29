@@ -36,9 +36,43 @@
     <% List<Products> products = (List<Products>) request.getAttribute("products");
       for(int i =0; i< products.size(); i++){ %>
         <p> <%= products.get(i).getDescription() %> </p>
-        
-
       <% } %>
+    
+    <h1>Products2</h1>
+    <% List<Products> products2 = (List<Products>) request.getAttribute("products2");
+      for(int i =0; i< products2.size(); i++){ %>
+        <p> <%= products2.get(i).getDescription() %> </p>
+        <p> <%= products2.get(i).getTitle() %> </p>
+      <% } %>
+
+    <h1>Products_elctronics</h1>
+    <% List<Products> product_electronics = (List<Products>) request.getAttribute("product_electronics");
+      for(int i =0; i< product_electronics.size(); i++){ %>
+        <p> <%= product_electronics.get(i).getDescription() %> </p>
+        <p> <%= product_electronics.get(i).getTitle() %> </p>
+      <% } %>
+    
+    <h1>Products Sport</h1>
+    <% List<Products> product_sport = (List<Products>) request.getAttribute("product_sport");
+      for(int i =0; i< product_sport.size(); i++){ %>
+        <p> <%= product_sport.get(i).getDescription() %> </p>
+        <p> <%= product_sport.get(i).getTitle() %> </p>
+      <% } %>
+    
+    <h1>Products Auto</h1>
+    <% List<Products> product_auto = (List<Products>) request.getAttribute("product_auto");
+      for(int i =0; i< product_auto.size(); i++){ %>
+        <p> <%= product_auto.get(i).getDescription() %> </p>
+        <p> <%= product_auto.get(i).getTitle() %> </p>
+      <% } %>
+    <h1>Products Bids</h1>
+    <% List<Products> product_bids = (List<Products>) request.getAttribute("product_bids");
+      for(int i =0; i< product_bids.size(); i++){ %>
+        <p> <%= product_bids.get(i).getDescription() %> </p>
+        <p> <%= product_bids.get(i).getTitle() %> </p>
+      <% } %>
+    
+
   </body>
   <script type="application/javascript" src="/JS/dist/bundle.js"></script>
 </html>
