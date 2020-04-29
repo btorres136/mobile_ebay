@@ -73,6 +73,21 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("/automotive")
+    public String auto(){
+        return "automotive";
+    }
+
+    @GetMapping("/electronics")
+    public String elec(){
+        return "electronics";
+    }
+
+    @GetMapping("/sports")
+    public String sports(){
+        return "sports";
+    }
+
     @GetMapping("/login")
     public String Login() {
         return "Login";
