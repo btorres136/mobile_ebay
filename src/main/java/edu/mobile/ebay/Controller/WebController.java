@@ -150,6 +150,21 @@ public class WebController {
 
         List<Products> products = productsRepo.findAll();
         model.addAttribute("products", products);
+
+        List<Products> products2 = productsRepo.findProductByKeyWord("bat");
+        model.addAttribute("products2", products2);
+
+        List<Products> product_sport = productsRepo.findSportProductsByKeyWord("bat");
+        model.addAttribute("product_sport", product_sport);
+
+        List<Products> product_electronics = productsRepo.findElectronicProductsByKeyWord("Dell Latop");
+        model.addAttribute("product_electronics", product_electronics);
+
+        List<Products> product_auto = productsRepo.findAutomotiveProductsByKeyWord("doge");
+        model.addAttribute("product_auto", product_auto);
+        
+        List<Products> product_bids = productsRepo.findProductOwnerPoductBidsByPorudctOwnerId(1111);
+        model.addAttribute("product_bids", product_bids);
         return "products";
     }
 

@@ -22,4 +22,19 @@ public interface ProductsRepo extends JpaRepository<Products,Long>{
 
     @Query(nativeQuery = true, value = "select * from products p, automotive_products ap, automotive a where p.productsid = ap.productsid and ap.automotiveid = a.automotiveid")
     List<Products> findAllAutomotiveProducts();
+
+    @Query(nativeQuery = true, value="select * from products where title like ?1%")
+    List<Products> findProductByKeyWord(String search);
+
+    @Query(nativeQuery = true, value ="select * from products p, electronics_products ep, electronics e where p.productsid = ep.productsid and ep.electronicsid = e.electronicsid and p.title like ?1%")
+    List<Products> findElectronicProductsByKeyWord(String search);
+
+    @Query(nativeQuery = true, value = "select * from products p, sports_products sp, sports s where p.productsid = sp.productsid and sp.sportsid = s.sportsid and p.title like ?1%")
+    List<Products> findSportProductsByKeyWord(String search);
+
+    @Query(nativeQuery = true, value = "select * from products p, automotive_products ap, automotive a where p.productsid = ap.productsid and ap.automotiveid = a.automotiveid and p.title like ?1%")
+    List<Products> findAutomotiveProductsByKeyWord(String search);  
+    
+    @Query(nativeQuery = true, value = "select * from products p, bids b where p.productsid = b.productsid and p.product_ownerid = ?1")
+    List<Products> findProductOwnerPoductBidsByPorudctOwnerId(int search);
 }
