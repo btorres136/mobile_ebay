@@ -1,6 +1,9 @@
 .content {
   width: 100%;
   overflow: hidden;
+  & .row{
+    margin: 0;
+  }
 }
 
 .main-container {

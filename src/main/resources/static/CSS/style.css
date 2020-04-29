@@ -7252,7 +7252,7 @@ body {
   right: 20px;
   transform: translateY(-50%); }
 
-@media (max-width: 932px) {
+@media (max-width: 1200px) {
   #sidebar {
     margin-left: -250px; }
   #sidebar.active {
@@ -7261,6 +7261,8 @@ body {
 .content {
   width: 100%;
   overflow: hidden; }
+  .content .row {
+    margin: 0; }
 
 .main-container {
   display: flex;

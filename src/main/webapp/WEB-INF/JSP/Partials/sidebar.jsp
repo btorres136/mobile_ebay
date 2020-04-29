@@ -5,7 +5,7 @@
     <ul class="list-unstyled">
       <p>Dummy Heading</p>
       <li>
-        <a>Hello</a>
+        <a href="/sec/Products/Add">AddProduct</a>
       </li>
       <li>
         <a>test</a>

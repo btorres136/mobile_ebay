@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="edu.mobile.ebay.DAO.Entities.Customers" %>
 <%@ page import="edu.mobile.ebay.DAO.Entities.Bids" %>
+<%@ page import="edu.mobile.ebay.DAO.Entities.Products" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
