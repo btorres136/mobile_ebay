@@ -24,7 +24,7 @@ public class LdapConfiguration {
     }
 
     @Bean
-    public LdapManager ldap(){
-        return new LdapManager();
+    public LDAPManager ldap(){
+        return new LDAPManager();
     }
 }

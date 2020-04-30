@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.mobile.ebay.DAO.Entities.Bids;
 import edu.mobile.ebay.DAO.Entities.Products;
 import edu.mobile.ebay.DAO.Entities.Sales;
-import edu.mobile.ebay.DAO.LDAP.LdapManager;
+import edu.mobile.ebay.DAO.LDAP.LDAPManager;
 import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
 import edu.mobile.ebay.DAO.Repositories.BidsRepo;
 import edu.mobile.ebay.DAO.Repositories.CustomersRepo;
@@ -67,7 +67,7 @@ public class WebController {
     ProductOwnersRepo productownersrepo;
 
     @Autowired
-    LdapManager ldap;
+    LDAPManager ldap;
 
     @GetMapping(value = { "/", "/index" })
     public String index() {
@@ -75,17 +75,23 @@ public class WebController {
     }
 
     @GetMapping("/automotive")
-    public String auto(){
+    public String auto(Model model){
+        List<Products> product_auto = productsRepo.findAutomotiveProductsByKeyWord("doge");
+        model.addAttribute("product_auto", product_auto);
         return "automotive";
     }
 
     @GetMapping("/electronics")
-    public String elec(){
+    public String electronics(Model model){
+        List<Products> product_electronics = productsRepo.findElectronicProductsByKeyWord("Dell Latop");
+        model.addAttribute("product_electronics", product_electronics);
         return "electronics";
     }
 
     @GetMapping("/sports")
-    public String sports(){
+    public String sports(Model model){
+        List<Products> product_sport = productsRepo.findSportProductsByKeyWord("bat");
+        model.addAttribute("product_sport", product_sport);
         return "sports";
     }
 
