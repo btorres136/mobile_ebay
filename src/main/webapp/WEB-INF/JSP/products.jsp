@@ -55,8 +55,8 @@
     <h1>Products Sport</h1>
     <% List<Products> product_sport = (List<Products>) request.getAttribute("product_sport");
       for(int i =0; i< product_sport.size(); i++){ %>
-        <p> <%= product_sport.get(i).getDescription() %> </p>
-        <p> <%= product_sport.get(i).getTitle() %> </p>
+        <p> <%= product_sport.get(i).getDescription(); %> </p>
+        <p> <%= product_sport.get(i).getTitle(); %> </p>
       <% } %>
     
     <h1>Products Auto</h1>

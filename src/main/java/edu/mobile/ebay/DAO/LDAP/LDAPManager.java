@@ -9,7 +9,7 @@ import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class LdapManager {
+public class LDAPManager {
     
     @Autowired
     private LdapTemplate ldapTemplate;
