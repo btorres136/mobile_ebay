@@ -16,10 +16,15 @@ public class LdapConfiguration {
     @Bean
     public LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://192.168.8.139:389/dc=mobile_ebay,dc=com");
-        contextSource.setBase("ou=Users,dc=mobile_ebay,dc=com");
+        contextSource.setUrl("ldap://192.168.8.140:389");
+        contextSource.setBase("dc=mobile_ebay,dc=com");
         contextSource.setUserDn("cn=ldapadm,dc=mobile_ebay,dc=com");
         contextSource.setPassword("87512738");
         return contextSource;
+    }
+
+    @Bean
+    public LdapManager ldap(){
+        return new LdapManager();
     }
 }

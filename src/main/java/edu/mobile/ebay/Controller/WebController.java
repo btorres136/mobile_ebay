@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.mobile.ebay.DAO.Entities.Bids;
 import edu.mobile.ebay.DAO.Entities.Products;
 import edu.mobile.ebay.DAO.Entities.Sales;
-import edu.mobile.ebay.DAO.LDAP.LDAPManager;
+import edu.mobile.ebay.DAO.LDAP.LdapManager;
 import edu.mobile.ebay.DAO.Repositories.AutomotiveRepo;
 import edu.mobile.ebay.DAO.Repositories.BidsRepo;
 import edu.mobile.ebay.DAO.Repositories.CustomersRepo;
@@ -66,7 +66,8 @@ public class WebController {
     @Autowired
     ProductOwnersRepo productownersrepo;
 
-    LDAPManager ldap = new LDAPManager();
+    @Autowired
+    LdapManager ldap;
 
     @GetMapping(value = { "/", "/index" })
     public String index() {
@@ -97,8 +98,8 @@ public class WebController {
         return "SignUp";
     }
     @PostMapping("/SignUp")
-    public String SignUp(@RequestParam("username") String User, @RequestParam("password") String Password){
-        ldap.create(User, Password);
+    public String SignUp(@RequestParam("username") String username, @RequestParam("password") String password){
+        ldap.create(username, password);
         return "redirect:/sec/Menu";
     }
 

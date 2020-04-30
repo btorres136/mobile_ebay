@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .userSearchFilter("uid={0}")
         .groupSearchBase("ou=Groups")
         .groupSearchFilter("uniqueMember={0}")
-        .contextSource().url("ldap://192.168.43.250:389/dc=mobile_ebay,dc=com")
+        .contextSource().url("ldap://192.168.8.140:389/dc=mobile_ebay,dc=com")
         .managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
         .managerPassword("87512738")
         .and()
