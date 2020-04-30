@@ -30,9 +30,9 @@ public class LdapManager {
         LdapName group = LdapNameBuilder.newInstance("cn=Customers,ou=Groups").build();
         DirContextOperations groupcontext = ldapTemplate.lookupContext(group);
 
-        //groupcontext.addAttributeValue("uniqueMember", "user");
+        groupcontext.addAttributeValue("uniqueMember", LdapNameBuilder.newInstance().add("ou", "users").add("cn", username).build().toString());
 
-        ldapTemplate.bind(groupcontext);
+        ldapTemplate.modifyAttributes(groupcontext);
 
 
 
