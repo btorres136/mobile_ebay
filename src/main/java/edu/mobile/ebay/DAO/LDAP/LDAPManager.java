@@ -15,14 +15,16 @@ public class LDAPManager {
     private LdapTemplate ldapTemplate;
 
 
-    public void create(String username, String password) {
+    public void create(String username,String lastname, String uid, String email,String password) {
         LdapName dn = LdapNameBuilder.newInstance().add("ou", "Users").add("cn", username).build();
         DirContextAdapter context = new DirContextAdapter(dn);
 
         context.setAttributeValues("objectclass",
                 new String[] { "top", "person", "organizationalPerson", "inetOrgPerson" });
         context.setAttributeValue("cn", username);
-        context.setAttributeValue("sn", username);
+        context.setAttributeValue("sn", lastname);
+        context.setAttributeValue("mail", email);
+        context.setAttributeValue("uid", uid);
         context.setAttributeValue("userPassword", new BCryptPasswordEncoder().encode(password));
 
         ldapTemplate.bind(context);
@@ -30,12 +32,9 @@ public class LDAPManager {
         LdapName group = LdapNameBuilder.newInstance("cn=Customers,ou=Groups").build();
         DirContextOperations groupcontext = ldapTemplate.lookupContext(group);
 
-        groupcontext.addAttributeValue("uniqueMember", LdapNameBuilder.newInstance().add("ou", "users").add("cn", username).build().toString());
+        groupcontext.addAttributeValue("uniqueMember", "cn="+username+",ou=Users,dc=mobile_ebay,dc=com");
 
         ldapTemplate.modifyAttributes(groupcontext);
-
-
-
     }
 
 }

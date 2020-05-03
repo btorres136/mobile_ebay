@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -14,77 +13,75 @@ import javax.persistence.Table;
 public class Customers {
 
     @Id
-    @GeneratedValue
-    @Column(name= "CustomerID", length = 11, nullable = false)
-    private Long CustomerID;
+    @Column(name= "customerID", length = 11, nullable = false)
+    private String customerID;
 
-    @OneToOne(mappedBy = "CustomerID")
-    private ProductOwners ProductOwnersID;
+    @OneToOne(mappedBy = "customerID")
+    private ProductOwners productOwnersID;
 
-    @Column(name = "Name", nullable = false, length = 50)
-    private String Name;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "Rating", nullable = false, length = 10)
-    private int Rating;
+    @Column(name = "rating", nullable = false, length = 10)
+    private int rating;
 
-    @Column(name = "AccountCreated", nullable = false)
-    private Date AccountCreated;
+    @Column(name = "accountCreated", nullable = false)
+    private Date accountCreated;
 
     public Customers() {
     }
 
-    public Customers(Long customerID, ProductOwners productOwnersID, String name, int rating, Date accountCreated) {
-        CustomerID = customerID;
-        ProductOwnersID = productOwnersID;
-        Name = name;
-        Rating = rating;
-        AccountCreated = accountCreated;
+    public Customers(String customerID, ProductOwners productOwnersID, String name, int rating, Date accountCreated) {
+        this.customerID = customerID;
+        this.productOwnersID = productOwnersID;
+        this.name = name;
+        this.rating = rating;
+        this.accountCreated = accountCreated;
     }
 
-    public Long getCustomerID() {
-        return CustomerID;
+    public String getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerID(Long customerID) {
-        CustomerID = customerID;
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
     public ProductOwners getProductOwnersID() {
-        return ProductOwnersID;
+        return productOwnersID;
     }
 
     public void setProductOwnersID(ProductOwners productOwnersID) {
-        ProductOwnersID = productOwnersID;
+        this.productOwnersID = productOwnersID;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getRating() {
-        return Rating;
+        return rating;
     }
 
     public void setRating(int rating) {
-        Rating = rating;
+        this.rating = rating;
     }
 
     public Date getAccountCreated() {
-        return AccountCreated;
+        return accountCreated;
     }
 
     public void setAccountCreated(Date accountCreated) {
-        AccountCreated = accountCreated;
+        this.accountCreated = accountCreated;
     }
 
     @Override
     public String toString() {
-        return "Customers [AccountCreated=" + AccountCreated + ", CustomerID=" + CustomerID + ", Name=" + Name + ", ProductOwnersID=" + ProductOwnersID + ", Rating=" + Rating + "]";
+        return "Customers [accountCreated=" + accountCreated + ", customerID=" + customerID + ", name=" + name
+                + ", productOwnersID=" + productOwnersID + ", rating=" + rating + "]";
     }
-
-    
 }

@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -21,20 +23,20 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth)
             throws IOException, ServletException {
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        authorities.forEach(authority -> {
-            if (authority.getAuthority().equals("ROLE_CUSTOMERS")) {
-                try {
-                    res.sendRedirect("/sec/Menu");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    res.sendRedirect("/403");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        boolean condition = authorities.stream().anyMatch(authority -> authority.getAuthority().equals("ROLE_CUSTOMERS")
+                || authority.getAuthority().equals("ROLE_PRODUCTOWNER"));
+        if (condition) {
+            try {
+                res.sendRedirect("/");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+        } else {
+            try {
+                res.sendRedirect("/403");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .userSearchFilter("uid={0}")
         .groupSearchBase("ou=Groups")
         .groupSearchFilter("uniqueMember={0}")
-        .contextSource().url("ldap://192.168.8.140:389/dc=mobile_ebay,dc=com")
+        .contextSource().url("ldap://192.168.8.141:389/dc=mobile_ebay,dc=com")
         .managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
         .managerPassword("87512738")
         .and()
@@ -28,11 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/electronics", "/automotive", "/sports", "/login", "/SignUp", "/products", "/UserIMG/**", "/", "/index", "/CSS/**", "/JS/**", "/IMG/**")
-        .permitAll().antMatchers("/sec/**").hasRole("CUSTOMERS").anyRequest().denyAll().and().formLogin()
+        http.logout().and().authorizeRequests().antMatchers( "/login", "/SignUp", "/", "/index", "/CSS/**", "/JS/**", "/IMG/**", "/UserIMG/**")
+        .permitAll().antMatchers("/sec/ProductOwner/**").hasRole("PRODUCTOWNER").antMatchers("/sec/**", "/logout").hasAnyRole("CUSTOMERS", "PRODUCTOWNER").anyRequest().denyAll().and().formLogin()
         .loginPage("/login")
         .loginProcessingUrl("/process_login")
-        .successHandler(new CustomAuthenticationSuccessHandler());
+        .successHandler(new CustomAuthenticationSuccessHandler())
+        .and().sessionManagement().maximumSessions(2);
     }
 
 }

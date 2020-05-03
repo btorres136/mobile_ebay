@@ -16,79 +16,77 @@ import javax.persistence.Table;
 public class Bids {
     @Id
     @GeneratedValue
-    @Column(name = "BidID")
-    private Long BidID;
+    @Column(name = "bidID")
+    private Long bidID;
 
-    @Column(name = "BidQuantity", nullable = false, length = 10)
-    private int BidQuantity;
+    @Column(name = "bidQuantity", nullable = false, length = 10)
+    private int bidQuantity;
 
-    @Column(name = "BidTimeSet", nullable = false)
-    private Date BidTimeSet;
+    @Column(name = "bidTimeSet", nullable = false)
+    private Date bidTimeSet;
 
     @ManyToOne
-    @JoinColumn(name = "CustomerID", nullable = false)
-    private Customers CustomerID;
+    @JoinColumn(name = "customerID", nullable = false)
+    private Customers customerID;
 
     @OneToOne
-    @JoinColumn(name = "ProductsID", nullable = false)
-    private Products ProductsID;
+    @JoinColumn(name = "productsID", nullable = false)
+    private Products productsID;
 
     public Bids() {
     }
 
     public Bids(Long bidID, int bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
-        BidID = bidID;
-        BidQuantity = bidQuantity;
-        BidTimeSet = bidTimeSet;
-        CustomerID = customerID;
-        ProductsID = productsID;
+        this.bidID = bidID;
+        this.bidQuantity = bidQuantity;
+        this.bidTimeSet = bidTimeSet;
+        this.customerID = customerID;
+        this.productsID = productsID;
     }
 
     public Long getBidID() {
-        return BidID;
+        return bidID;
     }
 
     public void setBidID(Long bidID) {
-        BidID = bidID;
+        this.bidID = bidID;
     }
 
     public int getBidQuantity() {
-        return BidQuantity;
+        return bidQuantity;
     }
 
     public void setBidQuantity(int bidQuantity) {
-        BidQuantity = bidQuantity;
+        this.bidQuantity = bidQuantity;
     }
 
     public Date getBidTimeSet() {
-        return BidTimeSet;
+        return bidTimeSet;
     }
 
     public void setBidTimeSet(Date bidTimeSet) {
-        BidTimeSet = bidTimeSet;
+        this.bidTimeSet = bidTimeSet;
     }
 
     public Customers getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(Customers customerID) {
-        CustomerID = customerID;
+        this.customerID = customerID;
     }
 
     public Products getProductsID() {
-        return ProductsID;
+        return productsID;
     }
 
     public void setProductsID(Products productsID) {
-        ProductsID = productsID;
+        this.productsID = productsID;
     }
 
     @Override
     public String toString() {
-        return "Bids [BidID=" + BidID + ", BidQuantity=" + BidQuantity + ", BidTimeSet=" + BidTimeSet + ", CustomerID="
-                + CustomerID + ", ProductsID=" + ProductsID + "]";
+        return "Bids [bidID=" + bidID + ", bidQuantity=" + bidQuantity + ", bidTimeSet=" + bidTimeSet + ", customerID="
+                + customerID + ", productsID=" + productsID + "]";
     }
-
-    
 }

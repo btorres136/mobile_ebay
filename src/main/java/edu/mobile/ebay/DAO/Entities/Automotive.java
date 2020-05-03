@@ -17,56 +17,51 @@ public class Automotive {
 
     @Id
     @GeneratedValue
-    @Column(name = "AutomotiveID", length = 11, nullable= false)
-    private Long AutomotiveID;
+    @Column(name = "automotiveID", length = 11, nullable= false)
+    private Long automotiveID;
 
     @Column(name = "AutoDescription", length = 250, nullable = false)
-    private String AutoDescription;
+    private String autoDescription;
 
     @ManyToMany(mappedBy = "automotiveProducts")
-    private Set<Products> ProductsID;
+    private Set<Products> productsID;
 
     public Automotive() {
-    
     }
 
     public Automotive(Long automotiveID, String autoDescription, Set<Products> productsID) {
-        AutomotiveID = automotiveID;
-        AutoDescription = autoDescription;
-        ProductsID = productsID;
+        this.automotiveID = automotiveID;
+        this.autoDescription = autoDescription;
+        this.productsID = productsID;
     }
 
     public Long getAutomotiveID() {
-        return AutomotiveID;
+        return automotiveID;
     }
 
     public void setAutomotiveID(Long automotiveID) {
-        AutomotiveID = automotiveID;
+        this.automotiveID = automotiveID;
     }
 
     public String getAutoDescription() {
-        return AutoDescription;
+        return autoDescription;
     }
 
     public void setAutoDescription(String autoDescription) {
-        AutoDescription = autoDescription;
+        this.autoDescription = autoDescription;
     }
 
     public Set<Products> getProductsID() {
-        return ProductsID;
+        return productsID;
     }
 
     public void setProductsID(Set<Products> productsID) {
-        ProductsID = productsID;
+        this.productsID = productsID;
     }
 
     @Override
     public String toString() {
-        return "Automotive [AutoDescription=" + AutoDescription + ", AutomotiveID=" + AutomotiveID + ", ProductsID="
-                + ProductsID + "]";
+        return "Automotive [autoDescription=" + autoDescription + ", automotiveID=" + automotiveID + ", productsID="
+                + productsID + "]";
     }
-
-    
-    
-    
 }

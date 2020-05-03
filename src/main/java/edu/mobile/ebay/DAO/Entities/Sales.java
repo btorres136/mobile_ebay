@@ -15,11 +15,11 @@ public class Sales {
 
     @Id
     @GeneratedValue
-    @Column(name = "SalesID", nullable = false, length=11)
-    private Long SalesID;
+    @Column(name = "salesID", nullable = false, length=11)
+    private Long salesID;
 
-    @Column(name = "TransactionTime", nullable = false)
-    private Date TransactionTime;
+    @Column(name = "transactionTime", nullable = false)
+    private Date transactionTime;
 
     @OneToOne
     private Products selledProduct;
@@ -34,27 +34,27 @@ public class Sales {
     }
 
     public Sales(Long salesID, Date transactionTime, Products selledProduct, ProductOwners seller, Customers buyer) {
-        SalesID = salesID;
-        TransactionTime = transactionTime;
+        this.salesID = salesID;
+        this.transactionTime = transactionTime;
         this.selledProduct = selledProduct;
         this.seller = seller;
         this.buyer = buyer;
     }
 
     public Long getSalesID() {
-        return SalesID;
+        return salesID;
     }
 
     public void setSalesID(Long salesID) {
-        SalesID = salesID;
+        this.salesID = salesID;
     }
 
     public Date getTransactionTime() {
-        return TransactionTime;
+        return transactionTime;
     }
 
     public void setTransactionTime(Date transactionTime) {
-        TransactionTime = transactionTime;
+        this.transactionTime = transactionTime;
     }
 
     public Products getSelledProduct() {
@@ -83,9 +83,7 @@ public class Sales {
 
     @Override
     public String toString() {
-        return "Sales [SalesID=" + SalesID + ", TransactionTime=" + TransactionTime + ", buyer=" + buyer
-                + ", selledProduct=" + selledProduct + ", seller=" + seller + "]";
+        return "Sales [buyer=" + buyer + ", salesID=" + salesID + ", selledProduct=" + selledProduct + ", seller="
+                + seller + ", transactionTime=" + transactionTime + "]";
     }
-
-    
 }

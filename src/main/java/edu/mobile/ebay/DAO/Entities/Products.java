@@ -22,48 +22,48 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ProductsID", length = 11, nullable = false)
-    private Long ProductsID;
+    @Column(name = "productsID", length = 11, nullable = false)
+    private Long productsID;
 
-    @Column(name = "Description", nullable = false, length = 255)
-    private String Description;
+    @Column(name = "description", nullable = false, length = 255)
+    private String description;
 
-    @Column( name = "StartBid", nullable = false, length = 10)
-    private Date StartBid;
+    @Column( name = "startBid", nullable = false, length = 10)
+    private Date startBid;
 
-    @Column(name = "EndBid", nullable = false, length = 10)
-    private Date EndBid;
+    @Column(name = "endBid", nullable = false, length = 10)
+    private Date endBid;
 
-    @Column(name = "State", nullable = false, length = 30)
-    private String State;
+    @Column(name = "state", nullable = false, length = 30)
+    private String state;
 
-    @Column(name = "ImagePath", length = 255)
-    private String ImagePath;
+    @Column(name = "imagePath", length = 255)
+    private String imagePath;
 
-    @Column(name = "Quantity", nullable = false, length = 10)
-    private int Quantity;
+    @Column(name = "quantity", nullable = false, length = 10)
+    private int quantity;
 
-    @Column(name = "Title", nullable=false, length = 30)
-    private String Title;
+    @Column(name = "title", nullable=false, length = 30)
+    private String title;
 
     @ManyToOne
-    @JoinColumn(name = "ProductOwnerID", nullable = false)
-    private ProductOwners ProductOwnersID;
+    @JoinColumn(name = "productOwnerID", nullable = false)
+    private ProductOwners productOwnersID;
 
     @ManyToMany
     @JoinTable(name="SportsProducts",
-    joinColumns = @JoinColumn(name="ProductsID"), inverseJoinColumns = @JoinColumn(name = "SportsID"))
+    joinColumns = @JoinColumn(name="productsID"), inverseJoinColumns = @JoinColumn(name = "sportsID"))
     private Set<Sports> sportsProducts;
 
     @ManyToMany
-    @JoinTable(name="ElectronicsProducts", joinColumns = @JoinColumn(name = "ProductsID"), inverseJoinColumns = @JoinColumn(name = "ElectronicsID"))
+    @JoinTable(name="ElectronicsProducts", joinColumns = @JoinColumn(name = "productsID"), inverseJoinColumns = @JoinColumn(name = "electronicsID"))
     private Set<Electronics> electronicsProducts;
 
     @ManyToMany
-    @JoinTable(name="AutomotiveProducts", joinColumns = @JoinColumn(name = "ProductsID"), inverseJoinColumns = @JoinColumn(name = "AutomotiveID"))
+    @JoinTable(name="AutomotiveProducts", joinColumns = @JoinColumn(name = "productsID"), inverseJoinColumns = @JoinColumn(name = "automotiveID"))
     private Set<Automotive> automotiveProducts;
 
-    @OneToOne(mappedBy = "ProductsID")
+    @OneToOne(mappedBy = "productsID")
     private Bids productsBids;
 
     public Products() {
@@ -72,15 +72,15 @@ public class Products {
     public Products(Long productsID, String description, Date startBid, Date endBid, String state, String imagePath,
             int quantity, String title, ProductOwners productOwnersID, Set<Sports> sportsProducts,
             Set<Electronics> electronicsProducts, Set<Automotive> automotiveProducts, Bids productsBids) {
-        ProductsID = productsID;
-        Description = description;
-        StartBid = startBid;
-        EndBid = endBid;
-        State = state;
-        ImagePath = imagePath;
-        Quantity = quantity;
-        Title = title;
-        ProductOwnersID = productOwnersID;
+        this.productsID = productsID;
+        this.description = description;
+        this.startBid = startBid;
+        this.endBid = endBid;
+        this.state = state;
+        this.imagePath = imagePath;
+        this.quantity = quantity;
+        this.title = title;
+        this.productOwnersID = productOwnersID;
         this.sportsProducts = sportsProducts;
         this.electronicsProducts = electronicsProducts;
         this.automotiveProducts = automotiveProducts;
@@ -88,75 +88,75 @@ public class Products {
     }
 
     public Long getProductsID() {
-        return ProductsID;
+        return productsID;
     }
 
     public void setProductsID(Long productsID) {
-        ProductsID = productsID;
+        this.productsID = productsID;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Date getStartBid() {
-        return StartBid;
+        return startBid;
     }
 
     public void setStartBid(Date startBid) {
-        StartBid = startBid;
+        this.startBid = startBid;
     }
 
     public Date getEndBid() {
-        return EndBid;
+        return endBid;
     }
 
     public void setEndBid(Date endBid) {
-        EndBid = endBid;
+        this.endBid = endBid;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public void setState(String state) {
-        State = state;
+        this.state = state;
     }
 
     public String getImagePath() {
-        return ImagePath;
+        return imagePath;
     }
 
     public void setImagePath(String imagePath) {
-        ImagePath = imagePath;
+        this.imagePath = imagePath;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public ProductOwners getProductOwnersID() {
-        return ProductOwnersID;
+        return productOwnersID;
     }
 
     public void setProductOwnersID(ProductOwners productOwnersID) {
-        ProductOwnersID = productOwnersID;
+        this.productOwnersID = productOwnersID;
     }
 
     public Set<Sports> getSportsProducts() {
@@ -193,10 +193,11 @@ public class Products {
 
     @Override
     public String toString() {
-        return "Products [Description=" + Description + ", EndBid=" + EndBid + ", ImagePath=" + ImagePath
-                + ", ProductOwnersID=" + ProductOwnersID + ", ProductsID=" + ProductsID + ", Quantity=" + Quantity
-                + ", StartBid=" + StartBid + ", State=" + State + ", Title=" + Title + ", automotiveProducts="
-                + automotiveProducts + ", electronicsProducts=" + electronicsProducts + ", productsBids=" + productsBids
-                + ", sportsProducts=" + sportsProducts + "]";
+        return "Products [automotiveProducts=" + automotiveProducts + ", description=" + description
+                + ", electronicsProducts=" + electronicsProducts + ", endBid=" + endBid + ", imagePath=" + imagePath
+                + ", productOwnersID=" + productOwnersID + ", productsBids=" + productsBids + ", productsID="
+                + productsID + ", quantity=" + quantity + ", sportsProducts=" + sportsProducts + ", startBid="
+                + startBid + ", state=" + state + ", title=" + title + "]";
     }
+
 }

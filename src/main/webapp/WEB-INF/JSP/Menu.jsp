@@ -1,4 +1,7 @@
-<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%> 
+<%@ page import="java.util.List" %> 
+<%@ page import="java.util.ArrayList" %> 
 <%@ page import="edu.mobile.ebay.DAO.Entities.Products" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +16,9 @@
     <div class="wrapper">
       <%@ include file="Partials/sidebar.jsp" %>
       <main class="content color-tertiary">
-        <%@ include file="Partials/navbar.jsp" %>
-        <%@ include file="Partials/main-search.jsp" %>
-        <%@ include file="Partials/products.jsp" %>
+        <%@ include file="Partials/navbar.jsp" %> <%@ include
+        file="Partials/main-search.jsp" %> <%@ include
+        file="Partials/products.jsp" %>
       </main>
     </div>
   </body>

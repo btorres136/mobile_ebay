@@ -15,79 +15,76 @@ public class ProductOwners {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ProductOwnerID", length = 11, nullable = false)
-    private Long ProductOwnerID;
+    @Column(name = "productOwnerID", length = 11, nullable = false)
+    private Long productOwnerID;
 
-    @Column(name = "Rating", length = 11, nullable = false)
-    private int Rating;
+    @Column(name = "rating", length = 11, nullable = false)
+    private int rating;
 
-    @Column(name = "Description", length = 255, nullable = false)
-    private String Description;
+    @Column(name = "description", length = 255, nullable = false)
+    private String description;
 
-    @Column(name = "SalesMade", length = 20, nullable = false)
-    private int SalesMade;
+    @Column(name = "salesMade", length = 20, nullable = false)
+    private int salesMade;
 
     @OneToOne
-    @JoinColumn(name = "CustomerID")
-    private Customers CustomerID;
+    @JoinColumn(name = "customerID")
+    private Customers customerID;
 
     public ProductOwners() {
     }
 
     public ProductOwners(Long productOwnerID, int rating, String description, int salesMade, Customers customerID) {
-        ProductOwnerID = productOwnerID;
-        Rating = rating;
-        Description = description;
-        SalesMade = salesMade;
-        CustomerID = customerID;
+        this.productOwnerID = productOwnerID;
+        this.rating = rating;
+        this.description = description;
+        this.salesMade = salesMade;
+        this.customerID = customerID;
     }
 
     public Long getProductOwnerID() {
-        return ProductOwnerID;
+        return productOwnerID;
     }
 
     public void setProductOwnerID(Long productOwnerID) {
-        ProductOwnerID = productOwnerID;
+        this.productOwnerID = productOwnerID;
     }
 
     public int getRating() {
-        return Rating;
+        return rating;
     }
 
     public void setRating(int rating) {
-        Rating = rating;
+        this.rating = rating;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public int getSalesMade() {
-        return SalesMade;
+        return salesMade;
     }
 
     public void setSalesMade(int salesMade) {
-        SalesMade = salesMade;
+        this.salesMade = salesMade;
     }
 
     public Customers getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(Customers customerID) {
-        CustomerID = customerID;
+        this.customerID = customerID;
     }
 
     @Override
     public String toString() {
-        return "ProductOwners [CustomerID=" + CustomerID + ", Description=" + Description + ", ProductOwnerID="
-                + ProductOwnerID + ", Rating=" + Rating + ", SalesMade=" + SalesMade + "]";
+        return "ProductOwners [customerID=" + customerID + ", description=" + description + ", productOwnerID="
+                + productOwnerID + ", rating=" + rating + ", salesMade=" + salesMade + "]";
     }
-
-    
-
 }

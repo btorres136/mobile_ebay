@@ -15,41 +15,38 @@ public class Electronics {
 
     @Id
     @GeneratedValue
-    @Column(name = "ElectronicsID", length = 11, nullable = false)
-    private Long ElectronicsID;
+    @Column(name = "electronicsID", length = 11, nullable = false)
+    private Long electronicsID;
 
     @ManyToMany(mappedBy = "electronicsProducts")
-    private Set<Products> ProductsID;
+    private Set<Products> productsID;
 
     public Electronics() {
     }
 
     public Electronics(Long electronicsID, Set<Products> productsID) {
-        ElectronicsID = electronicsID;
-        ProductsID = productsID;
+        this.electronicsID = electronicsID;
+        this.productsID = productsID;
     }
 
     public Long getElectronicsID() {
-        return ElectronicsID;
+        return electronicsID;
     }
 
     public void setElectronicsID(Long electronicsID) {
-        ElectronicsID = electronicsID;
+        this.electronicsID = electronicsID;
     }
 
     public Set<Products> getProductsID() {
-        return ProductsID;
+        return productsID;
     }
 
     public void setProductsID(Set<Products> productsID) {
-        ProductsID = productsID;
+        this.productsID = productsID;
     }
 
     @Override
     public String toString() {
-        return "Electronics [ElectronicsID=" + ElectronicsID + ", ProductsID=" + ProductsID + "]";
+        return "Electronics [electronicsID=" + electronicsID + ", productsID=" + productsID + "]";
     }
-
-    
-    
 }

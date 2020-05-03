@@ -3,18 +3,32 @@
     <i class="fas fa-bars BarsIcon"></i>
   </button>
   <ul class="navbar-nav ml-auto">
-    <div class="navbar-user">
-    </div>
+    <div class="navbar-user"></div>
     <li class="nav-item dropdown">
-      <i class="fas fa-user UserIcon"></i>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">
-          Profile
-        </a>
+      <i
+        class="far fa-user UserIcon"
+        id="navbarDropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      ></i>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <% if(request.getAttribute("user") != null){ %>
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
-        <button class="dropdown-item" onClick="">
-          SignOut
-        </button>
+        <form id="logout-form" action="/logout" method="post">
+          <input type="submit" class="dropdown-item" placeholder="LogOut" />
+          <input
+            type="hidden"
+            name="${_csrf.parameterName}"
+            value="${_csrf.token}"
+          />
+        </form>
+        <% } %>
+        <a class="dropdown-item" href="/login">SignIn</a>
+        <a class="dropdown-item" href="/SignUp">SignUp</a>
       </div>
     </li>
   </ul>

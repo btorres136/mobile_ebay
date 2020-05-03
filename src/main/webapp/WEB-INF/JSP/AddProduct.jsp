@@ -15,7 +15,7 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
       <main class="content color-tertiary">
         <%@ include file="Partials/navbar.jsp" %>
         <div class="main-container text-light">
-          <form method="post" action="/sec/Products/Add" enctype="multipart/form-data" >
+          <form method="post" action="/sec/ProductOwner/Products/Add" enctype="multipart/form-data" >
             <div class="form-group">
               <label for="ProductTitle">Product Title</label>
               <input
