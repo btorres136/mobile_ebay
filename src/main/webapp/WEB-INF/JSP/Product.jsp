@@ -18,8 +18,17 @@ pageEncoding="ISO-8859-1"%>
     <div class="wrapper">
       <%@ include file="Partials/sidebar.jsp" %>
       <main class="content color-tertiary">
-        <%@ include file="Partials/navbar.jsp" %> 
-        <%@ include file="Partials/header-pic.jsp" %>
+        <%@ include file="Partials/navbar.jsp" %> <%@ include
+        file="Partials/main-search.jsp" %>
+        <div class="main-container text-light">
+            <% Products prod = (Products) request.getAttribute("prod"); %>
+            <img class="" src="<%= prod.getImagePath() %>" alt="Card image cap" height="200" width="200">
+            <div class="text-light pr-5 pl-5">
+                <h5 class="text-center"><%=  prod.getTitle() %></h5>
+                <p class=""><%= prod.getDescription() %></p>
+                <p>End: <%= prod.getEndBid() %> </p>
+            </div>
+        </div>
       </main>
     </div>
     <div id="overlay" class="overlay"></div>

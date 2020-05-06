@@ -2,17 +2,20 @@ package edu.mobile.ebay.DAO.Repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 
 import edu.mobile.ebay.DAO.Entities.Products;
 
-public interface ProductsRepo extends JpaRepository<Products,Long>{
-    
+public interface ProductsRepo extends PagingAndSortingRepository<Products,Long>{
+
+    Products findByproductsID(String Id);
 
     @Query(nativeQuery = true, value = "select * from products")
-    List<Products> findAllProducts();
+    Page<Products> findAllProducts(Pageable pageable);
 
     @Query(nativeQuery = true, value ="select * from products p, electronics_products ep, electronics e where p.productsid = ep.productsid and ep.electronicsid = e.electronicsid")
     List<Products> findAllElectronicProducts();

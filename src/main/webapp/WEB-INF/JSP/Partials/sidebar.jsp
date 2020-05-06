@@ -1,37 +1,34 @@
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h3>Bootstrap Sidebar</h3>
+    <img src="/IMG/logo.png" height="150" width="150"/>
+    <p class="sidebar-header--text">You Market Place</p>
   </div>
+  <hr>
   <ul class="list-unstyled">
-    <p>Dummy Heading</p>
+    <li class="sidebar-item">
+      <a class="btn" href="/">
+        <i class="fas fa-home"></i>
+        Home
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="btn" href="/Products">
+        <i class="fas fa-th-list"></i>
+        See all Products
+      </a>
+    </li>
     <%if(request.getAttribute("isProductOwner") !=null){ if((boolean)
     request.getAttribute("isProductOwner")){ %>
-    <li>
-      <a>hello</a>
-    </li>
-    <li>
-      <a href="/sec/ProductOwner/Products/Add">AddProduct</a>
+    <li class="sidebar-item">
+      <a class="btn" href="/sec/ProductOwner/Products/Add">
+        <i class="far fa-plus-square"></i>
+        AddProduct
+      </a>
     </li>
     <% }else{ %>
-    <li>
-      <a>hello</a>
+    <li class="sidebar-item">
+      <a class="btn" href="/BeASeller">Be a seller</a>
     </li>
-    <li>
-      <a>Be a seller</a>
-    </li>
-    <li>
-      <a>chacata</a>
-    </li>
-    <% } }else {%>
-    <li>
-      <a>hello</a>
-    </li>
-    <li>
-      <a>Be a seller</a>
-    </li>
-    <li>
-      <a>chacata</a>
-    </li>
-    <% } %>
+    <% } } %>
   </ul>
 </nav>

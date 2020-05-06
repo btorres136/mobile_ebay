@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> 
-<%@ page import="java.util.List" %> 
-<%@ page import="java.util.ArrayList" %> 
-<%@ page import="edu.mobile.ebay.DAO.Entities.Products" %>
-<%@ page import="edu.mobile.ebay.DAO.Entities.Departments" %>
+pageEncoding="ISO-8859-1"%> <%@ page import="java.util.List" %> <%@ page
+import="java.util.ArrayList" %> <%@ page
+import="edu.mobile.ebay.DAO.Entities.Products" %> <%@ page
+import="edu.mobile.ebay.DAO.Entities.Departments" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,9 +16,12 @@ pageEncoding="ISO-8859-1"%>
   <body>
     <div class="wrapper">
       <%@ include file="Partials/sidebar.jsp" %>
-      <main class="content color-tertiary">
-        <%@ include file="Partials/navbar.jsp" %> 
-        <%@ include file="Partials/header-pic.jsp" %>
+      <main class="content">
+        <%@ include file="Partials/navbar.jsp" %> <%@ include
+        file="Partials/main-search.jsp" %>
+        <div class="main-container text-light">
+          <%@ include file="Partials/products.jsp" %>
+        </div>
       </main>
     </div>
     <div id="overlay" class="overlay"></div>

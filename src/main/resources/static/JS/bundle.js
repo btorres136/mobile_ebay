@@ -3672,7 +3672,7 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\njquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {\n  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sidebarCollapse').on('click', function () {\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sidebar').toggleClass('active');\n  });\n});\n\n//# sourceURL=webpack:///./src/JS/animations/animations.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\njquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {\n  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sidebarCollapse').on('click', function () {\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sidebar').toggleClass('active');\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#overlay').toggleClass('active');\n  });\n});\n\n//# sourceURL=webpack:///./src/JS/animations/animations.js?");
 
 /***/ }),
 

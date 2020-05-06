@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg shadow-lg navbar-dark color-primary-light">
+<nav class="fixed-top navbar navbar-expand-lg shadow-lg navbar-dark color-primary-light">
   <button type="button" id="sidebarCollapse" class="btn btn-info">
     <i class="fas fa-bars BarsIcon"></i>
   </button>
+  <img src="/IMG/name.png" height="25" />
   <ul class="navbar-nav ml-auto">
     <div class="navbar-user"></div>
     <li class="nav-item dropdown">
@@ -14,21 +15,21 @@
       ></i>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <% if(request.getAttribute("user") != null){ %>
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" href="#">My Profile</a>
+        <a class="dropdown-item" href="#">My Bids</a>
         <div class="dropdown-divider"></div>
         <form id="logout-form" action="/logout" method="post">
-          <input type="submit" class="dropdown-item" placeholder="LogOut" />
+          <button type="submit" class="dropdown-item" >LogOut</button>
           <input
             type="hidden"
             name="${_csrf.parameterName}"
             value="${_csrf.token}"
           />
         </form>
-        <% } %>
+        <% }else {%>
         <a class="dropdown-item" href="/login">SignIn</a>
         <a class="dropdown-item" href="/SignUp">SignUp</a>
+        <% } %>
       </div>
     </li>
   </ul>

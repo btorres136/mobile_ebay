@@ -1,0 +1,21 @@
+.product-card{
+    font-size: $default-font-size;
+    &__img{
+    }
+    &__title{
+        text-align: left;
+        font-weight: 400;
+        font-size: $default-font-size;
+        text-transform: capitalize;
+    }
+    &__description{
+        font-size: $default-font-size;
+    }
+    &__endbid{
+
+    }
+    &__btn{
+        font-size: $default-font-size;
+        text-transform: capitalize;
+    }
+}

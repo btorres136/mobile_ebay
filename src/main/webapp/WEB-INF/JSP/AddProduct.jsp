@@ -5,7 +5,8 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>VEXOM-You Marketing Place</title>
+    <link rel="shortcut icon" href="/IMG/logo.png">
 
     <link rel="stylesheet" href="/CSS/style.css" />
   </head>
@@ -15,7 +16,11 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
       <main class="content color-tertiary">
         <%@ include file="Partials/navbar.jsp" %>
         <div class="main-container text-light">
-          <form method="post" action="/sec/ProductOwner/Products/Add" enctype="multipart/form-data" >
+          <form
+            method="post"
+            action="/sec/ProductOwner/Products/Add"
+            enctype="multipart/form-data"
+          >
             <div class="form-group">
               <label for="ProductTitle">Product Title</label>
               <input
@@ -72,14 +77,19 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
               </label>
             </div>
             <div class="form-group">
-                <input type="date" name="endbid">
+              <input type="date" name="endbid" />
             </div>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input
+              type="hidden"
+              name="${_csrf.parameterName}"
+              value="${_csrf.token}"
+            />
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
       </main>
     </div>
+    <div id="overlay" class="overlay"></div>
+    <script type="application/javascript" src="/JS/bundle.js"></script>
   </body>
-  <script type="application/javascript" src="/JS/bundle.js"></script>
 </html>

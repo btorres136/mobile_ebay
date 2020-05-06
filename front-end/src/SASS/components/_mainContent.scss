@@ -1,12 +1,23 @@
 .content {
   width: 100%;
   overflow: hidden;
+  background: linear-gradient(to bottom, rgba(46,49,77,1) 10% , rgba(23,162,184,0.60));
   & .row{
     margin: 0;
   }
 }
 
 .main-container {
+  display: flex;
+  min-height: calc(100vh - 143.2px);
+  //margin-top: 40px;
+  flex-direction: column;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.main-search {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   padding: 2rem;
