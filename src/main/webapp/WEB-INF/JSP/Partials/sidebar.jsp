@@ -1,7 +1,7 @@
 <nav id="sidebar">
   <div class="sidebar-header">
     <img src="/IMG/logo.png" height="150" width="150"/>
-    <p class="sidebar-header--text">You Market Place</p>
+    <p class="sidebar-header--text">Your Market Place</p>
   </div>
   <hr>
   <ul class="list-unstyled">

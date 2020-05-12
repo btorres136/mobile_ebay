@@ -190,7 +190,7 @@ public class WebController {
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
         }
-        Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(0, 50);
         Page<Products> products = productsRepo.findAll(pageable);
         List<Products> prod = products.getContent();
         model.addAttribute("products", prod);
@@ -198,5 +198,4 @@ public class WebController {
         model.addAttribute("dep", dep);
         return "All_Products";
     }
-
 }

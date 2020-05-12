@@ -1,8 +1,12 @@
-<nav class="fixed-top navbar navbar-expand-lg shadow-lg navbar-dark color-primary-light">
+<nav
+  class="fixed-top navbar navbar-expand-lg shadow-lg navbar-dark color-primary-light"
+>
   <button type="button" id="sidebarCollapse" class="btn btn-info">
     <i class="fas fa-bars BarsIcon"></i>
   </button>
-  <img src="/IMG/name.png" height="25" />
+  <div class="pl-4">
+    <img src="/IMG/name.png" height="25" />
+  </div>
   <ul class="navbar-nav ml-auto">
     <div class="navbar-user"></div>
     <li class="nav-item dropdown">
@@ -13,13 +17,16 @@
         aria-haspopup="true"
         aria-expanded="false"
       ></i>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="navbarDropdown"
+      >
         <% if(request.getAttribute("user") != null){ %>
         <a class="dropdown-item" href="#">My Profile</a>
         <a class="dropdown-item" href="#">My Bids</a>
         <div class="dropdown-divider"></div>
         <form id="logout-form" action="/logout" method="post">
-          <button type="submit" class="dropdown-item" >LogOut</button>
+          <button type="submit" class="dropdown-item">LogOut</button>
           <input
             type="hidden"
             name="${_csrf.parameterName}"
