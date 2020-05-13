@@ -7,10 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "Departments")
 public class Departments {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "departmentId", nullable = false, length = 11)

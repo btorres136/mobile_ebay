@@ -12,6 +12,9 @@ public interface CustomersRepo extends JpaRepository<Customers, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM Customers,Product_Owners where Customers.customerid = Product_Owners.customerid")
     List<Customers> findCustomerandProductOwner();
 
+    @Query(nativeQuery = true, value = "select * from customers")
+    List<Customers> findAllCustomers();
+
     boolean existsByCustomerID(String id);
     Customers findByCustomerID(String id);
 }

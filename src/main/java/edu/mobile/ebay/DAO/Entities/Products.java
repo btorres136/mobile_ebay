@@ -13,11 +13,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "Products")
 public class Products {
 
+    
     @Id
     @Column(name = "productsID", length = 255, nullable = false)
     private String productsID;
@@ -43,10 +51,12 @@ public class Products {
     @Column(name = "itemPath", nullable = false, length = 255)
     private String itemPath;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "productOwnerID", nullable = false)
     private ProductOwners productOwnersID;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "departmentId", nullable = false)
     private Departments departmentId;

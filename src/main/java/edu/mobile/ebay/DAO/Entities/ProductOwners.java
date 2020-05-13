@@ -9,10 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "ProductOwners")
 public class ProductOwners {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "productOwnerID", length = 11, nullable = false)
@@ -27,6 +32,7 @@ public class ProductOwners {
     @Column(name = "salesMade", length = 20, nullable = false)
     private int salesMade;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "customerID")
     private Customers customerID;

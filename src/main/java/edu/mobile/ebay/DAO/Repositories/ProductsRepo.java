@@ -17,6 +17,9 @@ public interface ProductsRepo extends PagingAndSortingRepository<Products,Long>{
     @Query(nativeQuery = true, value = "select * from products")
     Page<Products> findAllProducts(Pageable pageable);
 
+    @Query(nativeQuery = true, value = "select * from products")
+    List<Products> findAllProducts();
+
     @Query(nativeQuery = true, value ="select * from products p, electronics_products ep, electronics e where p.productsid = ep.productsid and ep.electronicsid = e.electronicsid")
     List<Products> findAllElectronicProducts();
 

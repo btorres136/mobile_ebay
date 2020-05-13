@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Bids")
 public class Bids {
@@ -25,10 +27,12 @@ public class Bids {
     @Column(name = "bidTimeSet", nullable = false)
     private Date bidTimeSet;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "customerID", nullable = false)
     private Customers customerID;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "productsID", nullable = false)
     private Products productsID;

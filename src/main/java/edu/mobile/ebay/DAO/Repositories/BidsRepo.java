@@ -11,4 +11,7 @@ public interface BidsRepo extends JpaRepository<Bids, Long> {
 
     @Query(nativeQuery = true, value = "select * from bids where customerid =?1")
     List<Bids> findBids(int costumerid);
+
+    @Query(nativeQuery = true, value = "select * from bids")
+    List<Bids> findAllBids();
 }

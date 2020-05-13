@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.logout().and().authorizeRequests().antMatchers("Product","/Products","/Search","/item/**","/test","/login", "/SignUp", "/", "/index", "/CSS/**", "/JS/**", "/IMG/**", "/UserIMG/**")
+        http.logout().and().authorizeRequests().antMatchers("Product", "/POS","/Saless","/Bidss","/Customerss","/Departmentss","/Products", "/Productss","/Search","/item/**","/test","/login", "/SignUp", "/", "/index", "/CSS/**", "/JS/**", "/IMG/**", "/UserIMG/**")
         .permitAll().antMatchers("/sec/ProductOwner/**").hasRole("PRODUCTOWNER").antMatchers("/sec/**", "/logout").hasAnyRole("CUSTOMERS", "PRODUCTOWNER").anyRequest().denyAll().and().formLogin()
         .loginPage("/login")
         .loginProcessingUrl("/process_login")
