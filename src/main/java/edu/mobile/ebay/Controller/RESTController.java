@@ -1,5 +1,6 @@
 package edu.mobile.ebay.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resources;
@@ -52,12 +53,44 @@ public class RESTController {
 
     @GetMapping("/Productss")
     List<Products> all_prod(){
-        return ProductsRepo.findAllProducts();
+        List<Products> list = new ArrayList<Products>(); 
+        List<Products> response = ProductsRepo.findAllProducts();
+        for(int i = 0; i< response.size(); i++){
+            list.add(new Products());
+            list.get(i).setProductsID(response.get(i).getProductsID());
+            list.get(i).setDescription(response.get(i).getDescription());
+            list.get(i).setStartBid(response.get(i).getStartBid());
+            list.get(i).setEndBid(response.get(i).getEndBid());
+            list.get(i).setState(response.get(i).getState());
+            list.get(i).setImagePath(response.get(i).getImagePath());
+            list.get(i).setTitle(response.get(i).getTitle());
+            list.get(i).setItemPath(response.get(i).getItemPath());
+            list.get(i).setProductOwnersIdStr(response.get(i).getProductOwnersID().getProductOwnerID().toString());
+            list.get(i).setDepartmentIdStr(response.get(i).getDepartmentId().getDepartmentId().toString());
+            //list.get(i).setProductsBidsStr(response.get(i).getProductsBids().getBidID().toString());
+
+            if(response.get(i).getProductsBids() == null){
+                list.get(i).setProductsBidsStr("none");
+            }else{
+                list.get(i).setProductsBidsStr(response.get(i).getProductsBids().getBidID().toString());
+            }
+        }
+        
+        return list;
     }
 
     @GetMapping("/Departmentss")
     List<Departments> all_dep(){
-        return departmentsRepo.findAll();
+        List<Departments> response = departmentsRepo.findAll(); 
+        List<Departments> list = new ArrayList<Departments>();
+
+        for(int i = 0; i< response.size(); i++){
+            list.add(new Departments());
+            list.get(i).setDepartmentId(response.get(i).getDepartmentId());
+            list.get(i).setDepartmentName(response.get(i).getDepartmentName());
+            list.get(i).setDescription(response.get(i).getDescription());
+        }
+        return list;
     }
     
     @GetMapping("/Customerss")
@@ -67,16 +100,49 @@ public class RESTController {
 
     @GetMapping("/Bidss")
     List<Bids> all_bids(){
-        return bidsRepo.findAllBids();
+        List<Bids> response = bidsRepo.findAllBids(); 
+        List<Bids> list = new ArrayList<Bids>();
+
+        for(int i = 0; i< response.size(); i++){
+            list.add(new Bids());
+            list.get(i).setBidID(response.get(i).getBidID());
+            list.get(i).setBidQuantity(response.get(i).getBidQuantity());
+            list.get(i).setBidTimeSet(response.get(i).getBidTimeSet());
+            list.get(i).setCustomerIdStr(response.get(i).getCustomerID().getCustomerID());
+            list.get(i).setProductsIdStr(response.get(i).getProductsID().getProductsID());
+        }
+        return list;
     }
 
     @GetMapping("/POS")
     List<ProductOwners> all_pos(){
-        return PO_Repo.findAll();
+
+        List<ProductOwners> response = PO_Repo.findAll();
+        List<ProductOwners> list = new ArrayList<ProductOwners>();
+
+        for(int i = 0; i< response.size(); i++){
+            list.add(new ProductOwners());
+            list.get(i).setProductOwnerID(response.get(i).getProductOwnerID());
+            list.get(i).setRating(response.get(i).getRating());
+            list.get(i).setDescription(response.get(i).getDescription());
+            list.get(i).setCustomerIdStr(response.get(i).getCustomerID().getCustomerID());
+        }
+        return list;
     }
 
     @GetMapping("/Saless")
     List<Sales> all_salles(){
-        return salesRepo.findAll();
+        List<Sales> response = salesRepo.findAll();
+        List<Sales> list = new ArrayList<Sales>();
+
+        for(int i = 0; i< response.size(); i++){
+            list.add(new Sales());
+            list.get(i).setSalesID(response.get(i).getSalesID());
+            list.get(i).setTransactionTime(response.get(i).getTransactionTime());
+            list.get(i).setSelledProductIdStr(response.get(i).getSelledProduct().getProductsID());
+            list.get(i).setSellerIdStr(response.get(i).getSeller().getProductOwnerID().toString());
+            list.get(i).setBuyerIdStr(response.get(i).getBuyer().getCustomerID());
+        }
+        return list; 
     }
 }

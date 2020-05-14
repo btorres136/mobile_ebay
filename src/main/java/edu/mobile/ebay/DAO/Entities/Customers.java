@@ -9,8 +9,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerID")
 @Entity
 @Table(name = "Customers")
 public class Customers {
@@ -19,7 +22,7 @@ public class Customers {
     @Column(name= "customerID", length = 11, nullable = false)
     private String customerID;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne(mappedBy = "customerID")
     private ProductOwners productOwnersID;
 

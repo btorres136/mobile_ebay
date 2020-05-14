@@ -8,11 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productOwnerID")
 @Entity
 @Table(name = "ProductOwners")
 public class ProductOwners {
@@ -32,20 +36,25 @@ public class ProductOwners {
     @Column(name = "salesMade", length = 20, nullable = false)
     private int salesMade;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "customerID")
     private Customers customerID;
 
+    @Transient
+    private String customerIdStr;
+
+
     public ProductOwners() {
     }
 
-    public ProductOwners(Long productOwnerID, int rating, String description, int salesMade, Customers customerID) {
+    public ProductOwners(Long productOwnerID, int rating, String description, int salesMade, Customers customerID, String customerIdStr) {
         this.productOwnerID = productOwnerID;
         this.rating = rating;
         this.description = description;
         this.salesMade = salesMade;
         this.customerID = customerID;
+        this.customerIdStr = customerIdStr;
     }
 
     public Long getProductOwnerID() {
@@ -92,5 +101,13 @@ public class ProductOwners {
     public String toString() {
         return "ProductOwners [customerID=" + customerID + ", description=" + description + ", productOwnerID="
                 + productOwnerID + ", rating=" + rating + ", salesMade=" + salesMade + "]";
+    }
+
+    public String getCustomerIdStr() {
+        return customerIdStr;
+    }
+
+    public void setCustomerIdStr(String customerIdStr) {
+        this.customerIdStr = customerIdStr;
     }
 }
