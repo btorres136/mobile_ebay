@@ -1,23 +1,21 @@
 package edu.mobile.ebay.Controller;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.mobile.ebay.DAO.Entities.Bids;
 import edu.mobile.ebay.DAO.Entities.Customers;
 import edu.mobile.ebay.DAO.Entities.Departments;
 import edu.mobile.ebay.DAO.Entities.Products;
@@ -42,9 +41,6 @@ import edu.mobile.ebay.DAO.Repositories.SalesRepo;
 public class WebController {
     @Autowired
     private CustomersRepo customer;
-
-    @Autowired
-    private BidsRepo bid;
 
     @Autowired
     private BidsRepo bidRepo;
@@ -96,6 +92,26 @@ public class WebController {
         return "SignUp";
     }
 
+    @GetMapping("/category/{id}")
+    public String category(Model model,@Nullable Principal user, @Nullable Authentication auth, @PathVariable("id") Long dep_id){
+        if(user != null && auth.isAuthenticated()){
+            model.addAttribute("user", user.getName());
+            boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
+            model.addAttribute("isProductOwner", isProductOwner);
+        }
+        
+        List<Products> prod = productsRepo.findProductbyDepartment(dep_id);
+        model.addAttribute("products", prod);
+        ArrayList<Integer> bid = new ArrayList<>();
+        for(int i =0; i<prod.size(); i++){
+            bid.add(bidRepo.getMaxId(prod.get(i).getProductsID()));
+        }
+        model.addAttribute("bid", bid);
+        List<Departments> dep = departments_repo.findAll();
+        model.addAttribute("dep", dep);
+        return "All_Products";
+    }
+
     @PostMapping("/SignUp")
     public String SignUp(@RequestParam("username") String username, @RequestParam("lastname") String lastname,
             @RequestParam("uid") String uid, @RequestParam("email") String email,
@@ -122,8 +138,8 @@ public class WebController {
     }
 
     @PostMapping("/sec/ProductOwner/Products/Add")
-    public String AddtoProducts(@RequestParam("ProductTitle") String Title, HttpServletRequest request,
-            @RequestParam("Description") String Description, @RequestParam("endbid") Date enddate,
+    public String AddtoProducts(@RequestParam("startingbid") int startingbid, @RequestParam("ProductTitle") String Title, HttpServletRequest request,
+            @RequestParam("Description") String Description, @RequestParam("endbid") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date enddate,
             @RequestParam("img") MultipartFile Img, Principal user) throws IllegalStateException, IOException {
         Products product = new Products();
         UUID uuid = UUID.randomUUID();
@@ -151,6 +167,13 @@ public class WebController {
         product.setTitle(Title);
         product.setDepartmentId(departments_repo.getOne((long) 1));
         productsRepo.save(product);
+
+        Bids bid = new Bids();
+        bid.setBidQuantity(startingbid);
+        bid.setBidTimeSet(new Date(millis));
+        bid.setCustomerID(customerRepo.findByCustomerID(user.getName()));
+        bid.setProductsID(productsRepo.findByproductsID(uuid.toString()));
+        bidRepo.save(bid);
         return "redirect:/Products";
     }
 
@@ -158,6 +181,8 @@ public class WebController {
     private String showItem(@PathVariable("id") String id, Model model, @Nullable Principal user, @Nullable Authentication auth){
         Products prod = productsRepo.findByproductsID(id);
         model.addAttribute("prod", prod);
+        int bid = bidRepo.getMaxId(prod.getProductsID());
+        model.addAttribute("bid", bid);
         if(user != null && auth.isAuthenticated()){
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
@@ -194,8 +219,25 @@ public class WebController {
         Page<Products> products = productsRepo.findAll(pageable);
         List<Products> prod = products.getContent();
         model.addAttribute("products", prod);
+        ArrayList<Integer> bid = new ArrayList<>();
+        for(int i =0; i<prod.size(); i++){
+            bid.add(bidRepo.getMaxId(prod.get(i).getProductsID()));
+        }
+        model.addAttribute("bid", bid);
         List<Departments> dep = departments_repo.findAll();
         model.addAttribute("dep", dep);
         return "All_Products";
+    }
+
+    @PostMapping("/sec/product/addbid")
+    public String addbid(@RequestParam("productid") String prodid, Principal user, @RequestParam("bid") int bidval){
+        long millis = System.currentTimeMillis();
+        Bids bid = new Bids();
+        bid.setBidQuantity(bidval);
+        bid.setBidTimeSet(new Date(millis));
+        bid.setCustomerID(customerRepo.findByCustomerID(user.getName()));
+        bid.setProductsID(productsRepo.findByproductsID(prodid));
+        bidRepo.save(bid);
+        return "redirect:/item/"+ prodid;
     }
 }

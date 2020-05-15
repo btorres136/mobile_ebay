@@ -11,5 +11,6 @@ public interface DepartmentsRepo extends JpaRepository<Departments, Long>{
 
     @Query(nativeQuery = true, value = "Select * from Departments")
     List<Departments> findalldepartments();
+
     
 }

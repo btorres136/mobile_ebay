@@ -21,15 +21,15 @@ import="edu.mobile.ebay.DAO.Entities.Departments" %>
         file="Partials/main-search.jsp" %>
         <div class="main-container text-light">
           <div class="card">
-            <div class="row ">
-              <% Products prod = (Products) request.getAttribute("prod"); %>
+            <div class="row">
+              <% Products prod = (Products) request.getAttribute("prod"); int
+              bid = (int) request.getAttribute("bid"); %>
               <img
-                class="col-6"
+                class="col-lg-6"
                 src="<%= prod.getImagePath() %>"
                 alt="Card image cap"
-                width="1100"
               />
-              <div class="col">
+              <div class="col-lg-6 text-dark">
                 <h3 class="text-center"><%= prod.getTitle() %></h3>
                 <p>Products Status: <%= prod.getState() %></p>
                 <p class="">
@@ -41,6 +41,19 @@ import="edu.mobile.ebay.DAO.Entities.Departments" %>
                   prod.getProductOwnersID().getCustomerID().getCustomerID() %>
                 </p>
                 <p>This bid Started on: <%= prod.getStartBid() %></p>
+                <p>Actual bid: $<%= bid %></p>
+                <form method="post" action="/sec/product/addbid">
+                  <input class="form-control" type="number" name="bid"/>
+                  <input type="submit" />
+                  <input
+                    type="hidden"
+                    name="${_csrf.parameterName}"
+                    value="${_csrf.token}"
+                  />
+                  <input type="hidden"
+                  name="productid"
+                  value="<%= prod.getProductsID() %>"/>
+                </form>
               </div>
             </div>
           </div>

@@ -3,6 +3,8 @@ pageEncoding="ISO-8859-1"%> <%@ page import="java.util.List" %> <%@ page
 import="java.util.ArrayList" %> <%@ page
 import="edu.mobile.ebay.DAO.Entities.Products" %> <%@ page
 import="edu.mobile.ebay.DAO.Entities.Departments" %>
+<%@ page
+import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>

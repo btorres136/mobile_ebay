@@ -79,6 +79,9 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
             <div class="form-group">
               <input type="date" name="endbid" />
             </div>
+            <div class="form-group">
+              <input type="number" name="startingbid">
+            </div>
             <input
               type="hidden"
               name="${_csrf.parameterName}"

@@ -1,6 +1,6 @@
 package edu.mobile.ebay.DAO.Entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Bids")
@@ -22,14 +24,14 @@ public class Bids {
     @Column(name = "bidQuantity", nullable = false, length = 10)
     private int bidQuantity;
 
-    @Column(name = "bidTimeSet", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date bidTimeSet;
 
     @ManyToOne
     @JoinColumn(name = "customerID", nullable = false)
     private Customers customerID;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "productsID", nullable = false)
     private Products productsID;
 
@@ -37,10 +39,6 @@ public class Bids {
     }
 
     public Bids(Long bidID, int bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
-        this.bidID = bidID;
-        this.bidQuantity = bidQuantity;
-        this.bidTimeSet = bidTimeSet;
-        this.customerID = customerID;
         this.productsID = productsID;
     }
 

@@ -22,13 +22,17 @@ public class Departments {
     @Column(name = "description", nullable = false, length = 255)
     private String description;
 
+    @Column(name = "enable", nullable = false, length = 2)
+    private int enable;
+
     public Departments() {
     }
 
-    public Departments(Long departmentId, String departmentName, String description) {
+    public Departments(Long departmentId, String departmentName, String description, int enable) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.description = description;
+        this.enable = enable;
     }
 
     public Long getDepartmentId() {
@@ -55,10 +59,18 @@ public class Departments {
         this.description = description;
     }
 
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     @Override
     public String toString() {
         return "Departments [departmentId=" + departmentId + ", departmentName=" + departmentName + ", description="
-                + description + "]";
+                + description + ", enable=" + enable + "]";
     }
 }
 

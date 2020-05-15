@@ -1,22 +1,24 @@
 package edu.mobile.ebay.DAO.Entities;
 
-import java.sql.Date;
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 
 @Entity
 @Table(name = "Products")
 public class Products {
+
 
     @Id
     @Column(name = "productsID", length = 255, nullable = false)
@@ -25,10 +27,10 @@ public class Products {
     @Column(name = "description", nullable = false, length = 255)
     private String description;
 
-    @Column( name = "startBid", nullable = false, length = 10)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startBid;
 
-    @Column(name = "endBid", nullable = false, length = 10)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endBid;
 
     @Column(name = "state", nullable = false, length = 30)
@@ -43,6 +45,9 @@ public class Products {
     @Column(name = "itemPath", nullable = false, length = 255)
     private String itemPath;
 
+    @Column(name = "enable", nullable = false, length = 2)
+    private int enable;
+
     @ManyToOne
     @JoinColumn(name = "productOwnerID", nullable = false)
     private ProductOwners productOwnersID;
@@ -50,15 +55,16 @@ public class Products {
     @ManyToOne
     @JoinColumn(name = "departmentId", nullable = false)
     private Departments departmentId;
-    
-    @OneToOne(mappedBy = "productsID")
-    private Bids productsBids;
+
+    @OneToMany(mappedBy = "productsID")
+    private List<Bids> Bids;
 
     public Products() {
     }
 
     public Products(String productsID, String description, Date startBid, Date endBid, String state, String imagePath,
-            String title, String itemPath, ProductOwners productOwnersID, Departments departmentId, Bids productsBids) {
+            String title, String itemPath, int enable, ProductOwners productOwnersID, Departments departmentId,
+            List<edu.mobile.ebay.DAO.Entities.Bids> bids) {
         this.productsID = productsID;
         this.description = description;
         this.startBid = startBid;
@@ -67,9 +73,10 @@ public class Products {
         this.imagePath = imagePath;
         this.title = title;
         this.itemPath = itemPath;
+        this.enable = enable;
         this.productOwnersID = productOwnersID;
         this.departmentId = departmentId;
-        this.productsBids = productsBids;
+        Bids = bids;
     }
 
     public String getProductsID() {
@@ -136,6 +143,14 @@ public class Products {
         this.itemPath = itemPath;
     }
 
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     public ProductOwners getProductOwnersID() {
         return productOwnersID;
     }
@@ -152,19 +167,19 @@ public class Products {
         this.departmentId = departmentId;
     }
 
-    public Bids getProductsBids() {
-        return productsBids;
+    public List<Bids> getBids() {
+        return Bids;
     }
 
-    public void setProductsBids(Bids productsBids) {
-        this.productsBids = productsBids;
+    public void setBids(List<Bids> bids) {
+        Bids = bids;
     }
 
     @Override
     public String toString() {
-        return "Products [departmentId=" + departmentId + ", description=" + description + ", endBid=" + endBid
-                + ", imagePath=" + imagePath + ", itemPath=" + itemPath + ", productOwnersID=" + productOwnersID
-                + ", productsBids=" + productsBids + ", productsID=" + productsID + ", startBid=" + startBid
+        return "Products [Bids=" + Bids + ", departmentId=" + departmentId + ", description=" + description
+                + ", enable=" + enable + ", endBid=" + endBid + ", imagePath=" + imagePath + ", itemPath=" + itemPath
+                + ", productOwnersID=" + productOwnersID + ", productsID=" + productsID + ", startBid=" + startBid
                 + ", state=" + state + ", title=" + title + "]";
     }
 }

@@ -27,6 +27,9 @@ public class ProductOwners {
     @Column(name = "salesMade", length = 20, nullable = false)
     private int salesMade;
 
+    @Column(name = "enable", nullable = false, length = 2)
+    private int enable;
+
     @OneToOne
     @JoinColumn(name = "customerID")
     private Customers customerID;
@@ -34,11 +37,13 @@ public class ProductOwners {
     public ProductOwners() {
     }
 
-    public ProductOwners(Long productOwnerID, int rating, String description, int salesMade, Customers customerID) {
+    public ProductOwners(Long productOwnerID, int rating, String description, int salesMade, int enable,
+            Customers customerID) {
         this.productOwnerID = productOwnerID;
         this.rating = rating;
         this.description = description;
         this.salesMade = salesMade;
+        this.enable = enable;
         this.customerID = customerID;
     }
 
@@ -74,6 +79,14 @@ public class ProductOwners {
         this.salesMade = salesMade;
     }
 
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     public Customers getCustomerID() {
         return customerID;
     }
@@ -84,7 +97,7 @@ public class ProductOwners {
 
     @Override
     public String toString() {
-        return "ProductOwners [customerID=" + customerID + ", description=" + description + ", productOwnerID="
-                + productOwnerID + ", rating=" + rating + ", salesMade=" + salesMade + "]";
+        return "ProductOwners [customerID=" + customerID + ", description=" + description + ", enable=" + enable
+                + ", productOwnerID=" + productOwnerID + ", rating=" + rating + ", salesMade=" + salesMade + "]";
     }
 }

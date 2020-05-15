@@ -9,6 +9,9 @@ import edu.mobile.ebay.DAO.Entities.Bids;
 
 public interface BidsRepo extends JpaRepository<Bids, Long> {
 
-    @Query(nativeQuery = true, value = "select * from bids where customerid =?1")
+    @Query(nativeQuery = true, value = "select * from bids where customerid = ?1")
     List<Bids> findBids(int costumerid);
+
+    @Query(nativeQuery = true, value = "select MAX(bid_quantity) from bids where productsid = ?1")
+    int getMaxId(String productid);
 }
