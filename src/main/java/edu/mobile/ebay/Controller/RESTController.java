@@ -46,7 +46,7 @@ public class RESTController {
             message.get(i).setItemPath(product.get(i).getItemPath());
             message.get(i).setOwner(product.get(i).getProductOwnersID().getCustomerID().getCustomerID());
             message.get(i).setDepartment(product.get(i).getDepartmentId().getDepartmentId().toString());
-            List<Bids> bids = bidsRepo.findAll();
+            List<Bids> bids = bidsRepo.findBidsbyProductId(product.get(i).getProductsID());
             List<BidTemplate> prod_bids = new ArrayList<>();
             for (int y = 0; y < bids.size(); y++) {
                 prod_bids.add(new BidTemplate());
