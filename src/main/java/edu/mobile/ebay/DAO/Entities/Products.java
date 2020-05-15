@@ -14,11 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-
 @Entity
 @Table(name = "Products")
 public class Products {
-
 
     @Id
     @Column(name = "productsID", length = 255, nullable = false)
@@ -175,11 +173,11 @@ public class Products {
         Bids = bids;
     }
 
-    @Override
-    public String toString() {
-        return "Products [Bids=" + Bids + ", departmentId=" + departmentId + ", description=" + description
-                + ", enable=" + enable + ", endBid=" + endBid + ", imagePath=" + imagePath + ", itemPath=" + itemPath
-                + ", productOwnersID=" + productOwnersID + ", productsID=" + productsID + ", startBid=" + startBid
-                + ", state=" + state + ", title=" + title + "]";
-    }
+	@Override
+	public String toString() {
+		return "Products [Bids=" + Bids + ", departmentId=" + departmentId + ", description=" + description
+				+ ", enable=" + enable + ", endBid=" + endBid + ", imagePath=" + imagePath + ", itemPath=" + itemPath
+				+ ", productOwnersID=" + productOwnersID + ", productsID=" + productsID + ", startBid=" + startBid
+				+ ", state=" + state + ", title=" + title + "]";
+	}
 }

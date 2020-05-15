@@ -15,7 +15,7 @@ public interface ProductsRepo extends PagingAndSortingRepository<Products,Long>{
     Products findByproductsID(String Id);
 
     @Query(nativeQuery = true, value = "select * from products")
-    Page<Products> findAllProducts(Pageable pageable);
+    List<Products> findAllProducts();
 
     @Query(nativeQuery = true, value="select * from products where title like ?1%")
     List<Products> findProductByKeyWord(String search);

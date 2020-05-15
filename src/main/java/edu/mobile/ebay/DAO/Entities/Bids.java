@@ -8,10 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "Bids")
@@ -39,6 +39,10 @@ public class Bids {
     }
 
     public Bids(Long bidID, int bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
+        this.bidID = bidID;
+        this.bidQuantity = bidQuantity;
+        this.bidTimeSet = bidTimeSet;
+        this.customerID = customerID;
         this.productsID = productsID;
     }
 

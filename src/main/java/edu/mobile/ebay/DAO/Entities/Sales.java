@@ -8,7 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "salesID")
 @Entity
 @Table(name = "Sales")
 public class Sales {
@@ -21,24 +26,29 @@ public class Sales {
     @Column(name = "transactionTime", nullable = false)
     private Date transactionTime;
 
+    @JsonIgnore
     @OneToOne
     private Products selledProduct;
 
+    @Transient
+    private String selledProductIdStr;
+
+    @JsonIgnore
     @OneToOne
     private ProductOwners seller;
 
+    @Transient
+    private String sellerIdStr;
+
+    @JsonIgnore
     @OneToOne
     private Customers buyer;
 
-    public Sales() {
-    }
+    @Transient
+    private String buyerIdStr;
 
-    public Sales(Long salesID, Date transactionTime, Products selledProduct, ProductOwners seller, Customers buyer) {
-        this.salesID = salesID;
-        this.transactionTime = transactionTime;
-        this.selledProduct = selledProduct;
-        this.seller = seller;
-        this.buyer = buyer;
+
+    public Sales() {
     }
 
     public Long getSalesID() {
@@ -85,5 +95,41 @@ public class Sales {
     public String toString() {
         return "Sales [buyer=" + buyer + ", salesID=" + salesID + ", selledProduct=" + selledProduct + ", seller="
                 + seller + ", transactionTime=" + transactionTime + "]";
+    }
+
+    public String getSelledProductIdStr() {
+        return selledProductIdStr;
+    }
+
+    public void setSelledProductIdStr(String selledProductIdStr) {
+        this.selledProductIdStr = selledProductIdStr;
+    }
+
+    public String getSellerIdStr() {
+        return sellerIdStr;
+    }
+
+    public void setSellerIdStr(String sellerIdStr) {
+        this.sellerIdStr = sellerIdStr;
+    }
+
+    public String getBuyerIdStr() {
+        return buyerIdStr;
+    }
+
+    public void setBuyerIdStr(String buyerIdStr) {
+        this.buyerIdStr = buyerIdStr;
+    }
+
+    public Sales(Long salesID, Date transactionTime, Products selledProduct, String selledProductIdStr,
+            ProductOwners seller, String sellerIdStr, Customers buyer, String buyerIdStr) {
+        this.salesID = salesID;
+        this.transactionTime = transactionTime;
+        this.selledProduct = selledProduct;
+        this.selledProductIdStr = selledProductIdStr;
+        this.seller = seller;
+        this.sellerIdStr = sellerIdStr;
+        this.buyer = buyer;
+        this.buyerIdStr = buyerIdStr;
     }
 }
