@@ -1,10 +1,19 @@
 <nav id="sidebar">
   <div class="sidebar-header">
-    <img src="/IMG/logo.png" height="150" width="150"/>
+    <img src="/IMG/logo.png" height="150" width="150" />
     <p class="sidebar-header--text">Your Market Place</p>
   </div>
-  <hr>
+  <hr />
   <ul class="list-unstyled">
+    <%if(request.getAttribute("isAdmin") !=null){ if((boolean)
+    request.getAttribute("isAdmin")){ %>
+    <li class="sidebar-item">
+      <a class="btn" href="/sec/admin">
+        <i class="far fa-plus-square"></i>
+        Administrate App
+      </a>
+    </li>
+    <% } } %>
     <li class="sidebar-item">
       <a class="btn" href="/">
         <i class="fas fa-home"></i>

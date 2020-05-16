@@ -70,6 +70,9 @@ public class WebController {
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
+
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+            model.addAttribute("isAdmin", isAdmin);
         }
         List<Departments> dep = departments_repo.findAll();
         model.addAttribute("dep", dep);
@@ -98,6 +101,9 @@ public class WebController {
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
+
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+            model.addAttribute("isAdmin", isAdmin);
         }
         
         List<Products> prod = productsRepo.findProductbyDepartment(dep_id);
@@ -132,6 +138,8 @@ public class WebController {
     @GetMapping("/sec/ProductOwner/Products/Add")
     public String AddProduct(Principal user, Model model, Authentication auth) {
         boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("user", user.getName());
         model.addAttribute("isProductOwner", isProductOwner);
         return "AddProduct";
@@ -187,6 +195,9 @@ public class WebController {
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
+
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+            model.addAttribute("isAdmin", isAdmin);
         }
         List<Departments> dep = departments_repo.findAll();
         model.addAttribute("dep", dep);
@@ -200,6 +211,9 @@ public class WebController {
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
+
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+            model.addAttribute("isAdmin", isAdmin);
         }
         List<Products> products = productsRepo.findProductByKeyWord(product);
         model.addAttribute("products", products);
@@ -214,6 +228,9 @@ public class WebController {
             model.addAttribute("user", user.getName());
             boolean isProductOwner = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_PRODUCTOWNER")));
             model.addAttribute("isProductOwner", isProductOwner);
+
+            boolean isAdmin = auth.getAuthorities().stream().anyMatch((authority -> authority.getAuthority().equals("ROLE_ADMINS")));
+            model.addAttribute("isAdmin", isAdmin);
         }
         Pageable pageable = PageRequest.of(0, 50);
         Page<Products> products = productsRepo.findAll(pageable);
@@ -239,5 +256,10 @@ public class WebController {
         bid.setProductsID(productsRepo.findByproductsID(prodid));
         bidRepo.save(bid);
         return "redirect:/item/"+ prodid;
+    }
+
+    @GetMapping("/sec/admin")
+    public String admin(){
+        return "Admin";
     }
 }

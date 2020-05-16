@@ -19,7 +19,7 @@
             <% List<Departments> dep = (List<Departments>) request.getAttribute("dep");
               for(int i =0; i < dep.size(); i++){
               %>
-                 <a class="categories" href="#"><%= dep.get(i).getDepartmentName() %></a> 
+                 <a class="categories" href="/category/<%= dep.get(i).getDepartmentId() %>"><%= dep.get(i).getDepartmentName() %></a> 
               <% } %>
           </div>
     </div>
