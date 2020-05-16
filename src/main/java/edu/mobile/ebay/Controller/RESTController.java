@@ -97,4 +97,33 @@ public class RESTController {
         }
         return departmentTemplate;
     }
+
+    @GetMapping("/mobile/Products/{name}")
+    public List<ProductTemplate> GetProductByName(@PathVariable("name") String name){
+        List<Products> product = productsRepo.findProductByKeyWord(name);
+        List<ProductTemplate> message = new ArrayList<>();
+        for (int i = 0; i < product.size(); i++) {
+            message.add(new ProductTemplate());
+            message.get(i).setId(product.get(i).getProductsID());
+            message.get(i).setDescription(product.get(i).getDescription());
+            message.get(i).setEndBid(product.get(i).getEndBid());
+            message.get(i).setState(product.get(i).getState());
+            message.get(i).setImagePath(product.get(i).getImagePath());
+            message.get(i).setTitle(product.get(i).getTitle());
+            message.get(i).setItemPath(product.get(i).getItemPath());
+            message.get(i).setOwner(product.get(i).getProductOwnersID().getCustomerID().getCustomerID());
+            message.get(i).setDepartment(product.get(i).getDepartmentId().getDepartmentId().toString());
+            List<Bids> bids = bidsRepo.findBidsbyProductId(product.get(i).getProductsID());
+            List<BidTemplate> prod_bids = new ArrayList<>();
+            for (int y = 0; y < bids.size(); y++) {
+                prod_bids.add(new BidTemplate());
+                prod_bids.get(y).setEndDate(bids.get(y).getBidTimeSet());
+                prod_bids.get(y).setProduct(bids.get(y).getProductsID().getProductsID());
+                prod_bids.get(y).setQuantity(bids.get(y).getBidQuantity());
+            }
+            message.get(i).setBids(prod_bids);
+        }
+        return message;
+    }
+
 }
