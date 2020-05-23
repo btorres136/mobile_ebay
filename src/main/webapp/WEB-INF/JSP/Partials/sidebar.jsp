@@ -9,7 +9,7 @@
     request.getAttribute("isAdmin")){ %>
     <li class="sidebar-item">
       <a class="btn" href="/sec/admin">
-        <i class="far fa-plus-square"></i>
+        <i class="fas fa-users-cog"></i>
         Administrate App
       </a>
     </li>

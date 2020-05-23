@@ -22,7 +22,7 @@ public class Bids {
     private Long bidID;
 
     @Column(name = "bidQuantity", nullable = false, length = 10)
-    private int bidQuantity;
+    private double bidQuantity;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date bidTimeSet;
@@ -38,7 +38,7 @@ public class Bids {
     public Bids() {
     }
 
-    public Bids(Long bidID, int bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
+    public Bids(Long bidID, double bidQuantity, Date bidTimeSet, Customers customerID, Products productsID) {
         this.bidID = bidID;
         this.bidQuantity = bidQuantity;
         this.bidTimeSet = bidTimeSet;
@@ -54,11 +54,11 @@ public class Bids {
         this.bidID = bidID;
     }
 
-    public int getBidQuantity() {
+    public double getBidQuantity() {
         return bidQuantity;
     }
 
-    public void setBidQuantity(int bidQuantity) {
+    public void setBidQuantity(double bidQuantity) {
         this.bidQuantity = bidQuantity;
     }
 

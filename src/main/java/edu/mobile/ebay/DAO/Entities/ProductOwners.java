@@ -33,7 +33,7 @@ public class ProductOwners {
     private int enable;
 
     @OneToOne
-    @JoinColumn(name = "customerID")
+    @JoinColumn(name = "customerID", nullable = false)
     private Customers customerID;
 
     public ProductOwners() {
@@ -63,6 +63,10 @@ public class ProductOwners {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+	
+    public void setalgo(){
+	System.out.println("Hello World");
     }
 
     public String getDescription() {

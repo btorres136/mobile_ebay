@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %> <%@ page
 import="edu.mobile.ebay.DAO.Entities.Products" %>
+<%@ page import="java.util.List" %> <%@ page
+import="edu.mobile.ebay.DAO.Entities.Departments" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,6 +29,7 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
                 type="text"
                 class="form-control"
                 id="ProductTitle"
+                maxlength="30"
                 placeholder="Enter Product Title"
                 name="ProductTitle"
               />
@@ -39,6 +42,7 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
                 rows="3"
                 placeholder="Description"
                 name="Description"
+                maxlength="200"
               ></textarea>
             </div>
             <div class="form-group">
@@ -49,32 +53,22 @@ import="edu.mobile.ebay.DAO.Entities.Products" %>
                 name="img"
               />
             </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
-                value="option1"
-                name="new"
-                checked
-              />
-              <label class="form-check-label" for="exampleRadios1">
-                New
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="option2"
-                name="used"
-              />
-              <label class="form-check-label" for="exampleRadios2">
-                Used
-              </label>
+            <div class="form-group">
+              <label>Select a Department</label>
+            <select class="selectpicker" name="department_search">
+              <% List<Departments> dep = (List<Departments>) request.getAttribute("dep");
+                for(int i =0; i < dep.size(); i++){
+                %>
+                <option value="<%= dep.get(i).getDepartmentId() %>"><%= dep.get(i).getDepartmentName() %></option>
+                <% } %>
+            </select>
+          </div>
+            <div class="form-group">
+              <label>Product Condition</label>
+              <select class="selectpicker" name="status">
+                <option value="New">New</option>
+                <option value="used">used</option>
+              </select>
             </div>
             <div class="form-group">
               <input type="date" name="endbid" />

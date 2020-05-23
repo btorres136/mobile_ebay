@@ -4,29 +4,28 @@ import java.util.Date;
 
 public class BidTemplate {
 
-    private int quantity;
+    private double quantity;
 
     private Date date_set;
 
     private String product;
 
-    public BidTemplate() {
-    }
+    public BidTemplate() {} 
 
-    public BidTemplate(int quantity, Date endDate, String product) {
+    public BidTemplate(double quantity, Date endDate, String product) {
         this.quantity = quantity;
         this.date_set = endDate;
         this.product = product;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
-
+	
     public Date getEndDate() {
         return date_set;
     }
