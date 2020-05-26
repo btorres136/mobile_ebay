@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mobile.ebay.DAO.Repositories.ProductsRepo;
@@ -98,8 +99,8 @@ public class RESTController {
         return departmentTemplate;
     }
 
-    @GetMapping("/mobile/Products/{name}")
-    public List<ProductTemplate> GetProductByName(@PathVariable("name") String name){
+    @GetMapping("/mobile/Products/Search")
+    public List<ProductTemplate> GetProductByName(@RequestParam("name") String name){
         List<Products> product = productsRepo.findProductByKeyWord(name);
         List<ProductTemplate> message = new ArrayList<>();
         for (int i = 0; i < product.size(); i++) {
