@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,6 +60,39 @@ public class RESTController {
         }
         return message;
     }
+
+    
+    @GetMapping("/mobile/Departments/Products/{id}")
+    public List<ProductTemplate> getDepartmentProducts(@PathVariable("id") Long id){
+        List<Products> p = new ArrayList<>();
+        List<ProductTemplate> pT = new ArrayList<>();
+        p = productsRepo.findProductbyDepartment(id);
+
+        for(int i = 0; i<p.size(); i++){
+            pT.add(new ProductTemplate());
+            pT.get(i).setTitle(p.get(i).getTitle());
+            pT.get(i).setState(p.get(i).getState());
+            pT.get(i).setOwner(p.get(i).getProductOwnersID().getCustomerID().getCustomerID());
+            pT.get(i).setItemPath(p.get(i).getItemPath());
+            pT.get(i).setId(p.get(i).getProductsID());
+            pT.get(i).setEndBid(p.get(i).getEndBid());
+            pT.get(i).setDescription(p.get(i).getDescription());
+            pT.get(i).setImagePath(p.get(i).getImagePath());
+            pT.get(i).setDepartment(p.get(i).getDepartmentId().getDepartmentId().toString());
+            List<Bids> bids = bidsRepo.findBidsbyProductId(p.get(i).getProductsID());
+            List<BidTemplate> prod_bids = new ArrayList<>();
+            for (int y = 0; y < bids.size(); y++) {
+                prod_bids.add(new BidTemplate());
+                prod_bids.get(y).setEndDate(bids.get(y).getBidTimeSet());
+                prod_bids.get(y).setProduct(bids.get(y).getProductsID().getProductsID());
+                prod_bids.get(y).setQuantity(bids.get(y).getBidQuantity());
+            }
+            pT.get(i).setBids(prod_bids);
+        }
+
+        return pT;
+    }
+
 
     @GetMapping("/mobile/Products/{id}")
     public ProductTemplate GetProduct(@PathVariable("id") String id) {
@@ -126,5 +160,7 @@ public class RESTController {
         }
         return message;
     }
+
+    //@PostMapping("/mobile/addBid")
 
 }
