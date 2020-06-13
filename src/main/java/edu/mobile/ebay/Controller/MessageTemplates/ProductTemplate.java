@@ -1,7 +1,6 @@
 package edu.mobile.ebay.Controller.MessageTemplates;
 
 import java.util.Date;
-import java.util.List;
 
 public class ProductTemplate {
 
@@ -23,13 +22,13 @@ public class ProductTemplate {
 
     private String Department;
 
-    private List<BidTemplate> Bids;
+    private int Bid;
 
     public ProductTemplate() {
     }
 
     public ProductTemplate(String owner, String id, String description, Date endBid, String state, String imagePath,
-            String title, String itemPath, String department, List<BidTemplate> bids) {
+            String title, String itemPath, String department, int bid) {
         Owner = owner;
         this.id = id;
         Description = description;
@@ -39,7 +38,7 @@ public class ProductTemplate {
         this.title = title;
         this.itemPath = itemPath;
         Department = department;
-        Bids = bids;
+        Bid = bid;
     }
 
     public String getOwner() {
@@ -114,18 +113,18 @@ public class ProductTemplate {
         Department = department;
     }
 
-    public List<BidTemplate> getBids() {
-        return Bids;
+    public int getBid() {
+        return Bid;
     }
 
-    public void setBids(List<BidTemplate> bids) {
-        Bids = bids;
+    public void setBid(int bid) {
+        Bid = bid;
     }
 
     @Override
     public String toString() {
-        return "ProductTemplate [Bids=" + Bids + ", Department=" + Department + ", Description="
-                + Description + ", Owner=" + Owner + ", endBid=" + endBid + ", id=" + id + ", imagePath=" + imagePath
-                + ", itemPath=" + itemPath + ", state=" + state + ", title=" + title + "]";
+        return "ProductTemplate [Bid=" + Bid + ", Department=" + Department + ", Description=" + Description
+                + ", Owner=" + Owner + ", endBid=" + endBid + ", id=" + id + ", imagePath=" + imagePath + ", itemPath="
+                + itemPath + ", state=" + state + ", title=" + title + "]";
     }
 }
