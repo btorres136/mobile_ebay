@@ -2,29 +2,37 @@ package edu.mobile.ebay.Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.ldap.core.support.LdapContextSource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
+import org.springframework.security.ldap.userdetails.LdapUserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.mobile.ebay.DAO.Repositories.ProductsRepo;
+import edu.mobile.ebay.Services.Jwtutil;
 import edu.mobile.ebay.DAO.Entities.Products;
-import edu.mobile.ebay.Controller.MessageTemplates.BidTemplate;
+import edu.mobile.ebay.Controller.MessageTemplates.AuthResponseTemplate;
+import edu.mobile.ebay.Controller.MessageTemplates.AuthenticationTemplate;
 import edu.mobile.ebay.Controller.MessageTemplates.DepartmentTemplate;
 import edu.mobile.ebay.Controller.MessageTemplates.ProductTemplate;
 import edu.mobile.ebay.DAO.Entities.Bids;
@@ -48,7 +56,30 @@ public class RESTController {
     @Autowired
     private CustomersRepo customer_repo;
 
-    @GetMapping("/mobile/Products")
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private Jwtutil jwtTokenUtil;
+
+    @Autowired
+    LdapContextSource ldapContext;
+
+    @PostMapping("/mobile/api/authenticate")
+    public AuthResponseTemplate createAuthenticationToken(@RequestParam("password") String Password, @RequestParam("username") String Username){
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(Username, Password));
+
+        String searchBase = "ou=Users";
+        String searchFilter = "(&(objectClass=person)(uid={0}))";
+        FilterBasedLdapUserSearch search = new FilterBasedLdapUserSearch(searchBase, searchFilter, ldapContext);
+        search.setSearchSubtree(true);
+        LdapUserDetailsService userDetailsService = new LdapUserDetailsService(search);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(Username);
+        String jwt = jwtTokenUtil.generateToken(userDetails);
+        return new AuthResponseTemplate(jwt);
+    }
+
+    @GetMapping("/mobile/api/Products")
     public List<ProductTemplate> all_prod() {
         List<Products> product = productsRepo.findAllProducts();
         List<ProductTemplate> message = new ArrayList<>();
@@ -68,7 +99,7 @@ public class RESTController {
         return message;
     }
 
-    @GetMapping("/mobile/Departments/Products/{id}")
+    @GetMapping("/mobile/api/Departments/Products/{id}")
     public List<ProductTemplate> getDepartmentProducts(@PathVariable("id") Long id) {
         List<Products> p = new ArrayList<>();
         List<ProductTemplate> pT = new ArrayList<>();
@@ -90,7 +121,7 @@ public class RESTController {
         return pT;
     }
 
-    @GetMapping("/mobile/Products/{id}")
+    @GetMapping("/mobile/api/Products/{id}")
     public ProductTemplate GetProduct(@PathVariable("id") String id) {
         Products product = productsRepo.findByproductsID(id);
         ProductTemplate productTemplate = new ProductTemplate();
@@ -109,7 +140,7 @@ public class RESTController {
         return productTemplate;
     }
 
-    @GetMapping("/mobile/Departments")
+    @GetMapping("/mobile/api/Departments")
     public List<DepartmentTemplate> Departments() {
         List<DepartmentTemplate> departmentTemplate = new ArrayList<>();
         List<Departments> departments = departmentsRepo.findAll();
@@ -121,7 +152,7 @@ public class RESTController {
         return departmentTemplate;
     }
 
-    @GetMapping("/mobile/Products/Search")
+    @GetMapping("/mobile/api/Products/Search")
     public List<ProductTemplate> GetProductByName(@RequestParam("name") String name) {
         List<Products> product = productsRepo.findProductByKeyWord(name);
         List<ProductTemplate> message = new ArrayList<>();
@@ -141,7 +172,7 @@ public class RESTController {
         return message;
     }
 
-    @PostMapping("/mobile/addBid")
+    @PostMapping("/mobile/auth/addBid")
     public void addbid() {
         Bids bid = new Bids();
         Long millis = System.currentTimeMillis();
@@ -153,7 +184,7 @@ public class RESTController {
     }
 
     
-    @PostMapping("/mobile/addProduct")
+    @PostMapping("/mobile/auth/addProduct")
     public void addProduct(@RequestParam("startingbid") int startingbid, @RequestParam("ProductTitle") String Title,
             HttpServletRequest request, @RequestParam("Description") String Description,
             @RequestParam("department_search") Long dep_id, @RequestParam("status") String status,
