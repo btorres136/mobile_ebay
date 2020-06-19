@@ -33,7 +33,6 @@ import edu.mobile.ebay.DAO.Repositories.CustomersRepo;
 import edu.mobile.ebay.DAO.Repositories.DepartmentsRepo;
 import edu.mobile.ebay.DAO.Repositories.ProductOwnersRepo;
 import edu.mobile.ebay.DAO.Repositories.ProductsRepo;
-import edu.mobile.ebay.DAO.Repositories.SalesRepo;
 
 @Controller
 public class WebController {
@@ -47,8 +46,8 @@ public class WebController {
     @Autowired
     private ProductsRepo productsRepo;
 
-    @Autowired
-    private SalesRepo salesRepo;
+    /*@Autowired
+    private SalesRepo salesRepo;*/
 
     @Autowired
     private ProductOwnersRepo productownersrepo;

@@ -3,23 +3,22 @@ package edu.mobile.ebay.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ldap.core.support.LdapContextSource;
+
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
-import org.springframework.security.ldap.userdetails.LdapUserDetailsService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.mobile.ebay.DAO.Repositories.ProductsRepo;
 import edu.mobile.ebay.Services.Jwtutil;
+import edu.mobile.ebay.Services.UserService;
 import edu.mobile.ebay.DAO.Entities.Products;
 import edu.mobile.ebay.Controller.MessageTemplates.AuthResponseTemplate;
 import edu.mobile.ebay.Controller.MessageTemplates.AuthenticationTemplate;
@@ -63,20 +63,13 @@ public class RESTController {
     private Jwtutil jwtTokenUtil;
 
     @Autowired
-    LdapContextSource ldapContext;
+    private UserService userService;
 
     @PostMapping("/mobile/api/authenticate")
-    public AuthResponseTemplate createAuthenticationToken(@RequestParam("password") String Password, @RequestParam("username") String Username){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(Username, Password));
-
-        String searchBase = "ou=Users";
-        String searchFilter = "(&(objectClass=person)(uid={0}))";
-        FilterBasedLdapUserSearch search = new FilterBasedLdapUserSearch(searchBase, searchFilter, ldapContext);
-        search.setSearchSubtree(true);
-        LdapUserDetailsService userDetailsService = new LdapUserDetailsService(search);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(Username);
-        String jwt = jwtTokenUtil.generateToken(userDetails);
-        return new AuthResponseTemplate(jwt);
+    public AuthResponseTemplate createAuthenticationToken(@RequestBody AuthenticationTemplate auth) throws BadCredentialsException {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(auth.getUsername(), auth.getPassword()));
+        String jwt = jwtTokenUtil.generateToken(userService.loadUserByUsername(auth.getUsername()));
+        return new AuthResponseTemplate(jwt, "Bearer");
     }
 
     @GetMapping("/mobile/api/Products")
@@ -183,7 +176,6 @@ public class RESTController {
         bidsRepo.save(bid);
     }
 
-    
     @PostMapping("/mobile/auth/addProduct")
     public void addProduct(@RequestParam("startingbid") int startingbid, @RequestParam("ProductTitle") String Title,
             HttpServletRequest request, @RequestParam("Description") String Description,

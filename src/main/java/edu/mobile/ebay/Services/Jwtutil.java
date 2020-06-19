@@ -18,7 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class Jwtutil {
 
-    private String SECRET_KEY = "!#@pO09iK%E5@;&*<SdUBz";
+    private String SECRET_KEY = "!#@pO09iK%E5@;&*<SdUBzYjg2OTQyYjAzMmIiLC+=>=+JleHAiOjE1NDY2OD*!+_g3MzAsImF1dGhv<=cml0aWVzIjpb>=IlNUQ_+=U5EQVJEX%^&#$1VTRVI'//}{~`~`@13iLCJBRE1JTl9VU0VSIl0sImp0#$%)(SI6IjUyMjQ3NTFkLT-+)k0Yz";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -47,7 +47,7 @@ public class Jwtutil {
     }
 
     private String createToken(Map<String, Object> claims, String subject){
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)).signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 )).signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails){
