@@ -2,6 +2,7 @@ package edu.mobile.ebay.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -166,13 +167,13 @@ public class RESTController {
     }
 
     @PostMapping("/mobile/auth/addBid")
-    public void addbid() {
+    public void addbid(@RequestParam("product")String product, @RequestParam("bidadd") Double bidadd, Principal user) {
         Bids bid = new Bids();
         Long millis = System.currentTimeMillis();
         bid.setBidTimeSet(new Date(millis));
-        bid.setBidQuantity(0);
-        bid.setProductsID(productsRepo.findByproductsID(""));
-        bid.setCustomerID(customer_repo.findByCustomerID(""));
+        bid.setBidQuantity(bidadd);
+        bid.setProductsID(productsRepo.findByproductsID(product));
+        bid.setCustomerID(customer_repo.findByCustomerID(user.getName()));
         bidsRepo.save(bid);
     }
 
@@ -181,7 +182,7 @@ public class RESTController {
             HttpServletRequest request, @RequestParam("Description") String Description,
             @RequestParam("department_search") Long dep_id, @RequestParam("status") String status,
             @RequestParam("endbid") String enddate,
-            @RequestParam("img") MultipartFile Img) throws IllegalStateException, IOException {
+            @RequestParam("img") MultipartFile Img, Principal user) throws IllegalStateException, IOException {
         Logger log = LoggerFactory.getLogger(RESTController.class);
         log.info("TITLE: SOMETHING");
         Products product = new Products();
@@ -201,7 +202,7 @@ public class RESTController {
         }
         long millis = System.currentTimeMillis();
         product.setProductsID(uuid.toString());
-        product.setProductOwnersID(customer_repo.findByCustomerID("btorres136"/*user.getName()*/).getProductOwnersID());
+        product.setProductOwnersID(customer_repo.findByCustomerID(user.getName()).getProductOwnersID());
         product.setStartBid(new Date(millis));
         product.setDescription(Description);
         product.setItemPath("/item/" + uuid);
@@ -215,7 +216,7 @@ public class RESTController {
         Bids bid = new Bids();
         bid.setBidQuantity(startingbid);
         bid.setBidTimeSet(new Date(millis));
-        bid.setCustomerID(customer_repo.findByCustomerID("btorres136"));
+        bid.setCustomerID(customer_repo.findByCustomerID(user.getName()));
         bid.setProductsID(productsRepo.findByproductsID(uuid.toString()));
         bidsRepo.save(bid);
     }
