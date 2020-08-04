@@ -74,6 +74,7 @@ import="edu.mobile.ebay.DAO.Entities.Departments" %>
               <input type="date" name="endbid" />
             </div>
             <div class="form-group">
+              <label>Enter starting bid</label>
               <input type="number" name="startingbid">
             </div>
             <input

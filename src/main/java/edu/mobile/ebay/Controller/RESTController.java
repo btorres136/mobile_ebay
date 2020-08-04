@@ -66,6 +66,11 @@ public class RESTController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/mobile/api/CheckUsername")
+    public boolean CheckUsername(@RequestParam("uid") String uid){
+        return !customer_repo.existsByCustomerID(uid);
+    }
+
     @PostMapping("/mobile/api/authenticate")
     public AuthResponseTemplate createAuthenticationToken(@RequestBody AuthenticationTemplate auth) throws BadCredentialsException {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(auth.getUsername(), auth.getPassword()));
@@ -137,7 +142,7 @@ public class RESTController {
     @GetMapping("/mobile/api/Departments")
     public List<DepartmentTemplate> Departments() {
         List<DepartmentTemplate> departmentTemplate = new ArrayList<>();
-        List<Departments> departments = departmentsRepo.findAll();
+        List<Departments> departments = departmentsRepo.findalldepartments();
         for (int i = 0; i < departments.size(); i++) {
             departmentTemplate.add(new DepartmentTemplate());
             departmentTemplate.get(i).setDepartmentId(departments.get(i).getDepartmentId());

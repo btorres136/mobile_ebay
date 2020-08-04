@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
     @Order(1)
     @Configuration
     public static class RestConfiguration extends WebSecurityConfigurerAdapter {
@@ -34,7 +33,7 @@ public class WebSecurityConfig {
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.ldapAuthentication().userSearchBase("ou=Users").userSearchFilter("uid={0}").groupSearchBase("ou=Groups")
                     .groupSearchFilter("uniqueMember={0}").contextSource()
-                    .url("ldap://192.168.8.164:389/dc=mobile_ebay,dc=com").managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
+                    .url("ldap://192.168.8.172:389/dc=mobile_ebay,dc=com").managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
                     .managerPassword("87512738").and().passwordCompare().passwordEncoder(new BCryptPasswordEncoder())
                     .passwordAttribute("userPassword");
         }
@@ -54,7 +53,7 @@ public class WebSecurityConfig {
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.ldapAuthentication().userSearchBase("ou=Users").userSearchFilter("uid={0}").groupSearchBase("ou=Groups")
                     .groupSearchFilter("uniqueMember={0}").contextSource()
-                    .url("ldap://192.168.8.164:389/dc=mobile_ebay,dc=com").managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
+                    .url("ldap://192.168.8.172:389/dc=mobile_ebay,dc=com").managerDn("cn=ldapadm,dc=mobile_ebay,dc=com")
                     .managerPassword("87512738").and().passwordCompare().passwordEncoder(new BCryptPasswordEncoder())
                     .passwordAttribute("userPassword");
         }

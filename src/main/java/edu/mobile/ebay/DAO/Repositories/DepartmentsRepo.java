@@ -27,6 +27,16 @@ public interface DepartmentsRepo extends JpaRepository<Departments, Long>{
     @Query(nativeQuery = true, value = "update departments set enable = 1 where department_id = ?1")
     int enabledepartment(Long id);
 
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update departments set department_name = ?1 where department_id = ?2")
+    int changedepartmentname(String newdepartment_name, Long id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update departments set description = ?1 where department_id = ?2")
+    int changedepartmentdescription(String newdepartment_description, Long id);
+
 
 
 

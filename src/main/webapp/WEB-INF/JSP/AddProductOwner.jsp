@@ -24,7 +24,7 @@
 					<input type="text-area" max-length="50" name="description"/>
 				</div>
 				<div class="form-group">
-					<input type="submit" value="Add Department" class="btn btn-success" />
+					<input type="submit" value="Add ProductOwner" class="btn btn-success" />
 				</div>				
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</form>

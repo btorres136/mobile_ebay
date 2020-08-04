@@ -20,8 +20,9 @@ if(products.size() != 0){
                         <p>Department: <%= products.get(i).getDepartmentId().getDepartmentName() %></p>
                         <p>Actual bid: $<%= bid.get(i) %></p>
                         <a href="<%= products.get(i).getItemPath() %>" class="product-card__btn btn btn-info">See Product</a>
-                        <% if(isAdmin){ 
-                            if(products.get(i).getEnable() == 1){
+                        <% if(isAdmin){ %>
+                            <p>Product ID:  <%= products.get(i).getProductsID() %></p>
+                           <% if(products.get(i).getEnable() == 1){
                             %>
                         <form action="/sec/admin/disable/item" method="post">
                             <input

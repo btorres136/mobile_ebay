@@ -5,3 +5,4 @@ import solid from '@fortawesome/fontawesome-free/js/solid';
 fontawesome.library.add(regular);
 fontawesome.library.add(solid);
 import './animations/animations';
+import './validations/SignUpValidations';

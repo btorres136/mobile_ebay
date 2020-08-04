@@ -7409,3 +7409,9 @@ hr {
     margin-left: 3rem;
     flex: 1;
     font-size: 1.6rem; }
+
+.accepted {
+  color: #00f891; }
+
+.rejected {
+  color: red; }

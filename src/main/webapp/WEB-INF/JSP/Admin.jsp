@@ -19,6 +19,8 @@
       <main class="content">
         <%@ include file="Partials/navbar.jsp" %> 
         <div class="main-container text-light mt-5">
+			<h3>Products</h3>
+			<a href="/sec/admin/change/product" class="btn btn-success text-center">Change product info</a>
 			<div class="row">
 				<div class="col">
 				  <h3 class="text-center">Customers</h3>
@@ -72,6 +74,7 @@
 								<input type="submit" value="Enable" class="btn btn-success"/>
 							</form>
 						<% } %>
+						<a href="/sec/admin/change/department/<%= departments.get(i).getDepartmentId() %>" class="btn btn-success">Change department info</a>
 					</div>
 					<% } %>
 				</div>

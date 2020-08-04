@@ -1,5 +1,6 @@
 package edu.mobile.ebay.DAO.Repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -40,4 +41,29 @@ public interface ProductsRepo extends PagingAndSortingRepository<Products,Long>{
     @Transactional
     @Query(nativeQuery = true, value = "update products set enable = 1 where productsid = ?1")
     int enableproduct(String id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update products set title = ?1 where productsid = ?2")
+    int changeproductname(String newTitle, String id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update products set end_bid = ?1 where productsid = ?2")
+    int changeproductenddate(Date newend_bid, String id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update products set image_path = ?1 where productsid = ?2")
+    int changeproductimage(String newimage_path, String id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update products set department_id = ?1 where productsid = ?2")
+    int changeproductdepartment(int newdepartment, String id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "update products set description = ?1 where productsid = ?2")
+    int changeproductdescription(String newdescription, String id);
 }

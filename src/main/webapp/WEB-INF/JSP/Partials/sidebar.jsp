@@ -26,8 +26,8 @@
         See all Products
       </a>
     </li>
-    <%if(request.getAttribute("isProductOwner") !=null){ if((boolean)
-    request.getAttribute("isProductOwner")){ %>
+    <%if(request.getAttribute("isProductOwner") != null){ 
+      if((boolean)request.getAttribute("isProductOwner")){ %>
     <li class="sidebar-item">
       <a class="btn" href="/sec/ProductOwner/Products/Add">
         <i class="far fa-plus-square"></i>
@@ -36,7 +36,7 @@
     </li>
     <% }else{ %>
     <li class="sidebar-item">
-      <a class="btn" href="/BeASeller">Be a seller</a>
+      <a class="btn" href="/sec/BeASeller">Be a seller</a>
     </li>
     <% } } %>
   </ul>
